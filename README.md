@@ -1,1 +1,3 @@
-# FunctionalProgramming
+# 함수형 프그밍 스터디
+
+<br/>

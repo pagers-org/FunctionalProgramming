@@ -1,0 +1,33 @@
+{
+  "name": "functional-programming",
+  "version": "1.0.0",
+  "description": "함수형 프로그래밍 스터디",
+  "main": "jest.config.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FECrash/FunctionalProgramming.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FECrash/FunctionalProgramming/issues"
+  },
+  "homepage": "https://github.com/FECrash/FunctionalProgramming#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/eslint-parser": "^7.19.1",
+    "babel-jest": "^29.3.1",
+    "jest": "^29.3.1",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.0"
+  }
+}
