@@ -4,14 +4,8 @@
     "es2021": true,
     "node": true
   },
-  "extends": [
-    "eslint:recommended",
-    "prettier",
-    "plugin:cypress/recommended"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "prettier", "plugin:cypress/recommended"],
+  "plugins": ["prettier"],
   "parser": "@babel/eslint-parser",
   "parserOptions": {
     "requireConfigFile": false

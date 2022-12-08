@@ -1,12 +1,15 @@
+function getUpperCaseCondition(word) {
+  return word.length > 5;
+}
+
 function convertToConditionalUpperCase(words) {
   let capitalized = [];
 
   for (let i = 0; i < words.length; i++) {
-    if (words[i].length > 5) {
-      capitalized.push(words[i].toUpperCase());
-    } else {
-      capitalized.push(words[i].toLowerCase());
-    }
+    const word = words[i];
+    capitalized.push(
+      getUpperCaseCondition(word) ? word.toUpperCase() : word.toLowerCase()
+    );
   }
 
   return capitalized;
