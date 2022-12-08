@@ -1,10 +1,8 @@
 function multiDimensionalAccumulate(multiDimensionalArr) {
-  let accumulator = 0;
-  const multiDimensionalArrCopy = multiDimensionalArr.slice();
-  for (let i = 0; i < multiDimensionalArrCopy.length; i++) {
-    accumulator += singleDimensionalAccumulate(multiDimensionalArrCopy[i], i);
-  }
-  return accumulator;
+  return multiDimensionalArr.reduce(
+    (accumulator, currentArr, index) => accumulator + singleDimensionalAccumulate(currentArr, index),
+    0,
+  );
 }
 
 function singleDimensionalAccumulate(Arr, index) {
