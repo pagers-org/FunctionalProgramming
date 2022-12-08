@@ -1,21 +1,13 @@
 function convertToConditionalUpperCase(words) {
-  let capitalized = [];
-
-  for (let i = 0; i < words.length; i++) {
-    capitalized = addConditionalCapitalizedWord(capitalized, words[i]);
-  }
-
-  return capitalized;
+  return words.map(word => getConditionalCapitalizedWord(word));
 }
 
-function addConditionalCapitalizedWord(capitalizedWords, word) {
-  const capitalizedWordsCopy = capitalizedWords.slice();
+function getConditionalCapitalizedWord(word) {
   if (getWordCondition(word)) {
-    capitalizedWordsCopy.push(word.toUpperCase());
+    return word.toUpperCase();
   } else {
-    capitalizedWordsCopy.push(word.toLowerCase());
+    return word.toLowerCase();
   }
-  return capitalizedWordsCopy;
 }
 
 function getWordCondition(word) {
