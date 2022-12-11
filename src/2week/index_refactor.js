@@ -1,54 +1,53 @@
 /****************************************************************************
  *
- *                                  DATA
+ *                                ACTION
  *
  ***************************************************************************/
-var shopping_cart = [];
-var shopping_cart_total = 0;
+let shopping_cart = [];
 
-function add_item_to_cart(name, price) {
-  shopping_cart.push({
-    name: name,
-    price: price,
+const set_cart_total_dom = () => {};
+const get_buy_buttons_dom = () => {};
+const set_tax_dom = () => {};
+
+const add_item_to_cart = (name, price) => {
+  const item = make_cart_item(name, price);
+  shopping_cart = add_item(shopping_cart, item);
+
+  const total = calc_total(shopping_cart);
+  set_cart_total_dom(total);
+
+  update_shipping_icons(shopping_cart);
+  update_tax_dom(total);
+};
+
+const update_shipping_icons = cart => {
+  const buy_buttons = get_buy_buttons_dom();
+
+  buy_buttons.map(button => {
+    const { name, price } = button.item;
+    const item = make_cart_item(name, price);
+    const new_cart = add_item(cart, item);
+
+    gets_free_shipping(new_cart) ? button.show_free_shipping_icon() : button.hide_free_shipping_icon();
   });
+};
 
-  calc_cart_total();
-}
+const update_tax_dom = total => set_tax_dom(calc_tax(total));
+/****************************************************************************
+ *
+ *                             CALCULATE
+ *
+ ***************************************************************************/
+const make_cart_item = (name, price) => {
+  name, price;
+};
 
-function calc_cart_total() {
-  shopping_cart_total = 0;
+const add_element_last = (array, elem) => [...array, elem];
 
-  for (var i = 0; i < shopping_cart.length; i++) {
-    var item = shopping_cart[i];
+const add_item = (cart, item) => add_element_last(cart, item);
 
-    shopping_cart_total += item.price;
-  }
+const calc_total = cart => cart.reduce((acc, curr) => acc + curr.price, 0);
 
-  // NOTE 의미 상 필요한 함수 :: 장바구니 내 총액을 화면에 표시하는 함수
-  set_cart_total_dom();
-  update_shipping_icons();
-  // NOTE 의미 상 필요한 함수 :: 총액에 대한 세금을 화면에 표시하는 함수
-  update_tax_dom();
-}
+const gets_free_shipping = cart => calc_total(cart) >= 20;
 
-function update_shipping_icons() {
-  // NOTE 의미 상 필요한 함수 :: 돔 조작을 위한 함수
-  var buy_buttons = get_buy_buttons_dom();
-
-  for (var i = 0; i < buy_buttons.length; i++) {
-    var button = buy_buttons[i];
-    var item = button.item;
-
-    if (item.price + shopping_cart_total >= 20) {
-      // NOTE 의미 상 필요한 함수 :: 공짜 아이콘을 버튼 옆에 보여준다.
-      button.show_free_shipping_icon();
-    } else {
-      // NOTE 의미 상 필요한 함수 :: 공짜 아이콘을 버튼 옆에서 숨켜준다.
-      button.hide_free_shipping_icon();
-    }
-  }
-}
-
-function update_tax_dom() {
-  set_tax_dom(shopping_cart_total * 0.1);
-}
+const calc_tax = amount => amount * 0.1;
