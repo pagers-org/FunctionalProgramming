@@ -1,36 +1,52 @@
-const { add_item_to_cart, calc_cart_total } = require("./index.js");
-import { beforeEach, jest } from "node:test";
-var shopping_cart = [];
-var shopping_cart_total = 0;
+const {
+  make_cart_item,
+  add_element_last,
+  add_item,
+  calc_total,
+  gets_free_shipping,
+  calc_tax,
+} = require('./index_refactor.js');
 
-// 1. spyOn() calc_cart_total () => .toHaveCalled(1)
-// 2. jest.fn() => calc_cart_total() => 목킹을 해서 의미가 없도록 만든다.
+let list = [];
+beforeEach(() => {
+  console.log('before each');
 
-const calcCartTotal = jest.beforeEach(() => {
-  calcCartTotal.mockClear();
+  list = [
+    { name: '사과', price: 400 },
+    { name: '귤', price: 1000 },
+    { name: '치킨', price: 20000 },
+  ];
 });
 
-describe("addItemToCart", () => {
-  it("case: prev", () => {
-    expect(add_item_to_cart("apple", 1000)).toEqual(undefined);
+describe('4조 테스트', () => {
+  it('카트 생성', () => {
+    expect(make_cart_item('apple', 1000)).toEqual({ name: 'apple', price: 1000 });
   });
 
-  // it("case: 2", () => {
-  //   const words = [
-  //     "PIECE",
-  //     "FUNCTIONAL",
-  //     "OF",
-  //     "SENTENCE",
-  //     "CAKE",
-  //     "PERSPECTIVE",
-  //   ];
-  //   expect(convertToConditionalUpperCase(words)).toEqual([
-  //     "piece",
-  //     "FUNCTIONAL",
-  //     "of",
-  //     "SENTENCE",
-  //     "cake",
-  //     "PERSPECTIVE",
-  //   ]);
-  // });
+  it('배열 끝에 새로운 값 넣기', () => {
+    const list = ['first', 'second', 'third'];
+    expect(add_element_last(list, 'fourth')).toEqual(['first', 'second', 'third', 'fourth']);
+  });
+
+  it('카트에 아이템 추가하기', () => {
+    const item = { name: '포도', price: 1000 };
+    expect(add_item(list, item)).toEqual([
+      { name: '사과', price: 400 },
+      { name: '귤', price: 1000 },
+      { name: '치킨', price: 20000 },
+      { name: '포도', price: 1000 },
+    ]);
+  });
+
+  it('장바구니 총 합계 계산', () => {
+    expect(calc_total(list)).toBe(21400);
+  });
+
+  it('무료배송 확인하기', () => {
+    expect(gets_free_shipping(list)).toBe(true);
+  });
+
+  it('세금 계산하기', () => {
+    expect(calc_tax(1000)).toBe(100);
+  });
 });

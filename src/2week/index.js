@@ -30,6 +30,8 @@ function update_tax_dom() {
   //   set_tax_dom(shopping_cart_total * 0.1);
 }
 
+function set_cart_total_dom() {}
+
 function calc_cart_total() {
   shopping_cart_total = 0;
 

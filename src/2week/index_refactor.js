@@ -38,9 +38,10 @@ const update_tax_dom = total => set_tax_dom(calc_tax(total));
  *                             CALCULATE
  *
  ***************************************************************************/
-const make_cart_item = (name, price) => {
-  name, price;
-};
+const make_cart_item = (name, price) => ({
+  name,
+  price,
+});
 
 const add_element_last = (array, elem) => [...array, elem];
 
@@ -51,3 +52,5 @@ const calc_total = cart => cart.reduce((acc, curr) => acc + curr.price, 0);
 const gets_free_shipping = cart => calc_total(cart) >= 20;
 
 const calc_tax = amount => amount * 0.1;
+
+module.exports = { make_cart_item, add_element_last, add_item, calc_total, gets_free_shipping, calc_tax };
