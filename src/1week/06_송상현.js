@@ -55,7 +55,7 @@ const addCartItem = (previousCart, name, price) => [
   { name, price },
 ];
 
-export const updateShippingIcons = (totalPrice) => {
+const updateShippingIcons = (totalPrice) => {
   const buyButtons = getBuyButtonDom(); // dom으로부터 button 리스트를 받아오는 Action
 
   // '버튼 데이터'와 '총 가격 데이터'를 통해
