@@ -5,57 +5,58 @@
 
 // 전역변수와 관련 함수들. 모두 Action
 let shopping_cart = [];
-const fetch_shopping_cart = () => shopping_cart;
-const update_shopping_cart = (cart) => {
+const getShoppingCart = () => shopping_cart;
+const setShoppingCart = (cart) => {
   shopping_cart = cart;
 };
 
 // dom을 가져오거나 변경하는 Action 함수들
-function get_buy_button_dom() {}
-const update_tax_dom = (tax) => console.log(`tax_dom update to ${tax}`);
-const update_cart_total_dom = (cartTotalPrice) =>
+function getBuyButtonDom() {}
+const updateTaxDom = (tax) => console.log(`tax_dom update to ${tax}`);
+const updateCartTotalDom = (cartTotalPrice) =>
   console.log(`cart_total_dom update to ${cartTotalPrice}`);
 
-const show_free_shipping_icon = (buttons) =>
+const showFreeShippingIcon = (buttons) =>
   buttons.forEach((button) => {
     button.show_free_shipping_icon();
   });
 
-const hide_free_shipping_icon = (buttons) =>
+const hideFreeShippingIcon = (buttons) =>
   buttons.forEach((button) => {
     button.hide_free_shipping_icon();
   });
 
 // 메인 Action 함수
 // 유저가 쇼핑 카트 아이템을 클릭 했을 때 실행되고 인자로 클릭한 아이템 정보를 받는다.
-const click_shopping_cart_item = (name, price) => {
+const clickShoppingCartItem = (name, price) => {
   // 전역 데이터의 정보를 가져오는 Action
-  const shoppingCart = fetch_shopping_cart();
+  const shoppingCart = getShoppingCart();
 
   // Calc
-  const nextShoppingCart = addItem(shoppingCart, name, price);
-  const totalPrice = getTotalPrice(nextShoppingCart);
+  const nextShoppingCart = addCartItem(shoppingCart, name, price);
+  const totalPrice = getCartTotalPrice(nextShoppingCart);
   const tax = getTax(totalPrice);
 
   // dom을 업데이트 하는 Action 들
-  update_cart_total_dom(totalPrice);
-  update_tax_dom(tax);
-  update_shipping_icons(totalPrice);
+  updateCartTotalDom(totalPrice);
+  updateTaxDom(tax);
+  updateShippingIcons(totalPrice);
 
   // 전역변수 값을 변경하는 Action
-  update_shopping_cart(nextShoppingCart);
+  setShoppingCart(nextShoppingCart);
 };
 
 // Calc
 const getTax = (totalPrice) => totalPrice * 0.1;
-const getTotalPrice = (carts) => carts.reduce((acc, cur) => acc + cur.price, 0);
-const addItem = (previousCart, name, price) => [
+const getCartTotalPrice = (carts) =>
+  carts.reduce((acc, cur) => acc + cur.price, 0);
+const addCartItem = (previousCart, name, price) => [
   ...previousCart,
   { name, price },
 ];
 
-export const update_shipping_icons = (totalPrice) => {
-  const buyButtons = get_buy_button_dom(); // dom으로부터 button 리스트를 받아오는 Action
+export const updateShippingIcons = (totalPrice) => {
+  const buyButtons = getBuyButtonDom(); // dom으로부터 button 리스트를 받아오는 Action
 
   // '버튼 데이터'와 '총 가격 데이터'를 통해
   // 무료 배송 아이콘을 show 해야 할 (또은 hide 해야 할) 버튼을 필터링하는 Calc
@@ -64,8 +65,8 @@ export const update_shipping_icons = (totalPrice) => {
 
   // 인자로 넘겨준 버튼들의 무료 배송 아이콘을 show 또는 hide
   // dom을 업데이트하는 Action
-  show_free_shipping_icon(freeShippingButtons);
-  hide_free_shipping_icon(paidShippingButtons);
+  showFreeShippingIcon(freeShippingButtons);
+  hideFreeShippingIcon(paidShippingButtons);
 };
 
 // Calc
@@ -89,6 +90,6 @@ export {
   filterFreeShippingButtons,
   filterPaidShippingButtons,
   getTax,
-  getTotalPrice,
-  addItem,
+  getCartTotalPrice,
+  addCartItem,
 };
