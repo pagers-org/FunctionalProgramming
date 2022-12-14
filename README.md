@@ -12,4 +12,15 @@
 ## 🌟회차별 정리내용
 - 1주차
 
+  <div>
+
+  <img src="./assets/1week-1.png" width="500"/>
+  <img src="./assets/1week-2.png" width="500"/>
+
+  </div>
+
+<br/>
+
+- 2주차
+
 <br/>
