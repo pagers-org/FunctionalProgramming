@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "함수형 프로그래밍 스터디",
   "main": "jest.config.js",
-  "type": "commonjs",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },

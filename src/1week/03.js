@@ -1,12 +1,10 @@
+const { accumulate } = require("./02");
+
 function multiDimensionalAccumulate(multiDimensionalArr) {
   let accumulator = 0;
 
   for (let i = 0; i < multiDimensionalArr.length; i++) {
-    for (let j = 0; j < multiDimensionalArr[i].length; j++) {
-      if (j < i) {
-        accumulator += multiDimensionalArr[i][j];
-      }
-    }
+    accumulator += accumulate(multiDimensionalArr[i].slice(0, i));
   }
 
   return accumulator;
