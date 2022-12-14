@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 //actions
 function get_buy_buttons_dom() {
   //
@@ -27,8 +28,9 @@ function add_item_to_cart(name, price, carts) {
 }
 
 // 계산
-const getButtonItemPrice = button => button.item.price;
-const shouldShowIcon = (button, total) => getButtonItemPrice(button) + total >= 20;
+const getButtonItemPrice = (button) => button.item.price;
+const shouldShowIcon = (button, total) =>
+  getButtonItemPrice(button) + total >= 20;
 const showIconButtonIndexList = (buttons, total) =>
   buttons
     .map((button, index) => [button, index])
@@ -46,19 +48,23 @@ function update_shipping_icons() {
   // dom이 있을 거라고 코드가 작성되어 있다. -> 횟수나, 시점에 의존한다. -> 액션이다.
   // 1. buttons -> dom ->
   var buy_buttons = get_buy_buttons_dom();
-  showIconButtonIndexList(buy_buttons, shopping_cart_total).forEach(i => buy_buttons[i].show_free_shipping_icon());
-  hideIconButtonIndexList(buy_buttons, shopping_cart_total).forEach(i => buy_buttons[i].hide_free_shipping_icon());
+  showIconButtonIndexList(buy_buttons, shopping_cart_total).forEach((i) =>
+    buy_buttons[i].show_free_shipping_icon()
+  );
+  hideIconButtonIndexList(buy_buttons, shopping_cart_total).forEach((i) =>
+    buy_buttons[i].hide_free_shipping_icon()
+  );
 }
 
 // 계산
-const calc_tax = aTotal => aTotal * 0.1;
+const calc_tax = (aTotal) => aTotal * 0.1;
 // action
 function update_tax_dom(aTotal) {
   set_tax_dom(calc_tax(aTotal));
 }
 
 // 1,2 계산 -> 계산
-const _카트_총_가격 = cartList => {
+const _카트_총_가격 = (cartList) => {
   let total = 0;
   for (var i = 0; i < cartList.length; i++) {
     var item = shopping_cart[i];
@@ -94,11 +100,11 @@ function calc_cart_total(name, price) {
   update_tax_dom();
 }
 
-module.exports = {
-  update_shipping_icons,
-  update_tax_dom,
-  calc_cart_total,
-  add_item_to_cart,
-  showIconButtonIndexList,
-  hideIconButtonIndexList,
-};
+// module.exports = {
+//   update_shipping_icons,
+//   update_tax_dom,
+//   calc_cart_total,
+//   add_item_to_cart,
+//   showIconButtonIndexList,
+//   hideIconButtonIndexList,
+// };
