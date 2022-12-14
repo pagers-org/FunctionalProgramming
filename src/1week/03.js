@@ -1,15 +1,8 @@
+const { accumulate } = require('./02.js');
+
+const filter_왼쪽_아래_삼각형 = (arr, i) => arr.filter((item, j) => j < i);
 function multiDimensionalAccumulate(multiDimensionalArr) {
-  let accumulator = 0;
-
-  for (let i = 0; i < multiDimensionalArr.length; i++) {
-    for (let j = 0; j < multiDimensionalArr[i].length; j++) {
-      if (j < i) {
-        accumulator += multiDimensionalArr[i][j];
-      }
-    }
-  }
-
-  return accumulator;
+  return accumulate(multiDimensionalArr.map(filter_왼쪽_아래_삼각형).flat());
 }
 
 exports.multiDimensionalAccumulate = multiDimensionalAccumulate;
