@@ -1,0 +1,74 @@
+[
+  {
+    "src": "/assets/image/coffee/오늘의_커피.jpeg",
+    "category": "C",
+    "name": "오늘의 커피",
+    "price": 1000
+  }, 
+  {
+    "src": "/assets/image/coffee/나이트로_바닐라_크림.jpeg",
+    "category": "C",
+    "name": "나이트로 바닐라 크림",
+    "price": 3500
+  },
+  {
+    "src": "/assets/image/coffee/나이트로_콜드_브루.jpeg",
+    "category": "C",
+    "name": "나이트로 콜드 브루",
+    "price": 4000
+  },
+  {
+    "src": "/assets/image/coffee/돌체_콜드_브루.jpeg",
+    "category": "C",
+    "name": "돌체 콜드 브루",
+    "price": 3900
+  },
+  {
+    "src": "/assets/image/coffee/자바_칩_프라푸치노.jpeg",
+    "category": "C",
+    "name": "자바 칩 프라푸치노",
+    "price": 5200
+  },
+  {
+    "src": "/assets/image/coffee/민트_콜드_브루.jpeg",
+    "category": "C",
+    "name": "민트 콜드 브루",
+    "price": 4800
+  },
+  {
+    "src": "/assets/image/coffee/바닐라_크림_콜드_브루.jpeg",
+    "category": "C",
+    "name": "바닐라 크림 콜드 브루",
+    "price": 4300
+  },
+  {
+    "src": "/assets/image/coffee/아이스_토피넛_라떼.jpeg",
+    "category": "C",
+    "name": "아이스 토피넛 라떼",
+    "price": 5500
+  },
+  {
+    "src": "/assets/image/coffee/제주_비저링_콜드_브루.jpeg",
+    "category": "C",
+    "name": "제주 비저링 콜드 브루",
+    "price": 6000
+  },
+  {
+    "src": "/assets/image/bread/razberry.jpeg",
+    "category": "B",
+    "name": "라즈베리 쇼콜라",
+    "price": 7000
+  },
+  {
+    "src": "/assets/image/bread/scone.jpeg",
+    "category": "B",
+    "name": "클래식 스콘",
+    "price": 3300
+  },
+  {
+    "src": "/assets/image/bread/tiramisu.jpeg",
+    "category": "B",
+    "name": "티라미수 크림 데니쉬",
+    "price": 7200
+  }
+]
