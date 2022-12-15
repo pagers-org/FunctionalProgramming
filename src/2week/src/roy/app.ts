@@ -1,48 +1,56 @@
-type CartItem = {
-  name: string;
-  category: string;
-  price: number;
-}
-type Product = CartItem & {
-  elem: HTMLElement;
+import renderProducts from './renderProducts'
+import { CartItem, Product } from './types'
+
+const useState = <T>(initialState: T): [() => T, (arg: ((prev: T) => T)) => T] => {
+  let _state: T = initialState
+  return [
+    () => _state,
+    arg => {
+      _state = arg(_state)
+      return _state
+    }
+  ]
 }
 
-const shoppingCart: CartItem[] = []
-
-const products: Product[] = Array.from(document.querySelector('.items')?.children ?? []).map(elem => {
-  const name = elem.querySelector('.menu-name')?.textContent ?? ''
-  const category = elem.querySelector('.category')?.textContent ?? ''
-  const price = parseInt((elem.querySelector('.price')?.textContent ?? '').replace(/,/g, ''))
-  return { name, category, price, elem: elem as HTMLElement }
-})
+const [getCartState, setCartState] = useState<CartItem[]>([])
+const products = renderProducts()
 
 const isFreeShipping = (product: Product, total: number) => product.price + total >= 20000
-const getCartTotal = () => shoppingCart.reduce((res, item) => res + item.price, 0)
+const getCartTotal = () => getCartState().reduce((res, item) => res + item.price, 0)
+const getTotalTax = (total: number) => total * 0.1
+const addItemToCart = (item: CartItem) => setCartState(prev => [...prev, item])
+
 const updateDOM = () => {
   const cartTotal = getCartTotal()
-  document.querySelector('.total-price')!.textContent = String(cartTotal)
-  document.querySelector('.total-tax')!.textContent = String(cartTotal * 0.1)
+  document.querySelector('.total-price')!.textContent = cartTotal.toLocaleString('ko-KR') + '원'
+  document.querySelector('.total-tax')!.textContent = getTotalTax(cartTotal).toLocaleString('ko-KR') + '원'
   products.forEach(product => {
     if (product.elem) {
-      product.elem.style.backgroundColor = isFreeShipping(product, cartTotal) ? 'yellow' : 'white';
+      product.elem.classList.toggle('free', isFreeShipping(product, cartTotal));
     }
   })
 }
-const addItemToCart = (item: CartItem) => {
-  shoppingCart.push(item)
+const handleClick = (e: Event) => {
+  const tg = e.target as HTMLElement;
+  if (tg.localName !== 'button') return
+  const $item = tg.closest('.item') as HTMLElement;
+  const product = products.find(p => p.elem === $item)
+  if (product) {
+    addItemToCart({ name: product.name, category: product.category, price: product.price })
+    console.log(getCartState())
+    updateDOM()
+  }
+}
+const clearCart = () => {
+  setCartState(() => [])
   updateDOM()
 }
 
-document.querySelector('.items')!.addEventListener('click', e => {
-  const tg = e.target as HTMLElement;
-  if (tg.localName !== 'button') return
-  const parent = tg.parentNode as HTMLElement;
-  const product = products.find(p => p.elem === parent)
-  if (product) {
-    addItemToCart({ name: product.name, category: product.category, price: product.price })
-  }
-})
+document.querySelector('.items')!.addEventListener('click', handleClick)
+document.querySelector('.clear')!.addEventListener('click', clearCart)
 
 export {
-  addItemToCart,
+  isFreeShipping,
+  getCartTotal,
+  getTotalTax,
 }
