@@ -1,1 +1,3 @@
-export * from './roy/app'
+import { addItemToCart } from "./jeong/app";
+
+addItemToCart();
