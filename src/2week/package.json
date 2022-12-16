@@ -1,12 +1,18 @@
 {
   "name": "fecrash-cafe",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "app.ts",
   "license": "MIT",
   "scripts": {
     "test": "cypress run --browser chrome"
   },
   "devDependencies": {
-    "cypress": "^12.1.0"
+    "@babel/preset-react": "^7.18.6",
+    "cypress": "^12.1.0",
+    "eslint": "^8.29.0",
+    "prettier": "^2.8.1"
+  },
+  "dependencies": {
+    "typescript": "^4.9.4"
   }
 }
