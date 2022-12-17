@@ -1,22 +1,27 @@
 // 데이터
 import { ShoppingCart } from "./types/type";
+import { GetNumbersOnString } from "./utils/getNumbersOnString";
 
 let shoppingCart: ShoppingCart[] = [];
-const TAX_RATE = 0.1;
-
 const setShoppingCart = (newShoppingCart: ShoppingCart[]) => {
   shoppingCart = newShoppingCart;
 };
+
+// const [shoppingCart, setShoppingCart] = State<Array<ShoppingCart>>([]);
+const TAX_RATE = 0.1;
 
 // 클릭 액션
 document.querySelectorAll("button").forEach((button) =>
   button.addEventListener("click", ({ target }) => {
     const name =
-      button.parentNode?.querySelector(".menu-name")?.textContent || "";
+      (target as Node).parentNode?.querySelector(".menu-name")?.textContent ||
+      "";
     const category =
-      button.parentNode?.querySelector(".category")?.textContent || "";
-    const price = (button.parentNode?.querySelector(".price")?.textContent ||
-      0) as number;
+      (target as Node).parentNode?.querySelector(".category")?.textContent ||
+      "";
+    const price = GetNumbersOnString(
+      (target as Node).parentNode?.querySelector(".price")?.textContent || ""
+    );
 
     setShoppingCart(addItemToCart({ name, category, price }));
     handleDomUpdate();
@@ -24,8 +29,8 @@ document.querySelectorAll("button").forEach((button) =>
 );
 
 const addItemOnArray = <T>(array: T[], item: T): T[] => [...array, item];
-const getTotalFromArray = <T extends {}>(array: T[], element: keyof T) =>
-  array.reduce((acc, cur) => acc + cur[String(element)], 0);
+const getTotalFromArrayOfObject = <T>(array: T[], element: keyof T) =>
+  array.reduce((acc, cur) => acc + (cur[`${element}`] as any), 0);
 
 const addItemToCart = (cartItem: ShoppingCart) =>
   addItemOnArray<ShoppingCart>(shoppingCart, cartItem);
@@ -42,7 +47,7 @@ const addShowOrHideShoppingIconOnArray = <T>(array: T[]) =>
   }));
 
 const handleDomUpdate = () => {
-  const shoppingCartPriceTotal = getTotalFromArray<ShoppingCart>(
+  const shoppingCartPriceTotal = getTotalFromArrayOfObject<ShoppingCart>(
     shoppingCart,
     "price"
   );
