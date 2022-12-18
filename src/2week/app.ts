@@ -76,7 +76,7 @@ const updateTaxDom = (shoppingCartTotal: number) =>
 const updateTax = (price: number): number => price * TAX_RATE;
 const setTaxDom = (tax: number) => {
   (
-    document.querySelector(".total-price") as HTMLElement
+    document.querySelector(".total-tax") as HTMLElement
   ).textContent = `${tax}원₩`;
 };
 
