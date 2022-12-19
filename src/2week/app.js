@@ -51,7 +51,6 @@ document.querySelectorAll('button').forEach(button =>
     const price = Number(target.parentNode.querySelector('.price').textContent.replace('원', '').replace(',', ''));
     const cart = add_item_to_cart(shopping_cart, { name, category, price });
     setShopingCart(cart);
-    console.log(cart);
     calc_cart_total(cart);
   }),
 );
@@ -71,8 +70,6 @@ function update_shipping_icons(cart, total) {
   var buy_buttons = get_buy_buttons_dom(cart);
   for (var i = 0; i < buy_buttons.length; i++) {
     var item = buy_buttons[i];
-    console.log(item);
-    console.log(total);
     if (getFreeShopping(total, 2000)) item.show_free_shopping_icon(item.name);
     else item.hide_free_shopping_icon();
   }
