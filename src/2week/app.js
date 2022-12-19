@@ -6,7 +6,7 @@ const $items = document.getElementsByClassName('item');
 // 3. 유틸리티, 스키마, 비지니스 로직
 
 // 계산
-const addItemToCart = (cart, item) => [...cart, item];
+const addItemToCart = (cart, item) => [...cart, { ...item }];
 const getFreeShopping = (total, price) => total >= price;
 const getPriceWithTax = total => Math.floor(total * 1.1);
 const getTotalPrice = cart => cart.reduce((acc, item) => acc + item.price, 0);
