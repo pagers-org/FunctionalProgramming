@@ -7,9 +7,9 @@ var shopping_cart_total = 0;
 
 // 계산
 const add_item_to_cart = (cart, item) => [...cart, item];
-const isFreeShopping = (total, price) => total >= price;
+const getFreeShopping = (total, price) => total >= price;
 const getPriceWithTax = total => Math.floor(total * 1.1);
-const calcTotal = cart => cart.reduce((acc, item) => acc + item.price, 0);
+const getTotalPrice = cart => cart.reduce((acc, item) => acc + item.price, 0);
 const get_buy_buttons_dom = cart =>
   cart.map(item => ({
     ...item,
@@ -38,7 +38,7 @@ document.querySelectorAll('button').forEach(button =>
 );
 
 const calc_cart_total = cart => {
-  const total = calcTotal(cart);
+  const total = getTotalPrice(cart);
   const priceWithTax = getPriceWithTax(total);
   set_cart_total_dom(priceWithTax);
   update_shipping_icons(cart, total);
@@ -54,7 +54,7 @@ function update_shipping_icons(cart, total) {
     var item = buy_buttons[i];
     console.log(item);
     console.log(total);
-    if (isFreeShopping(total, 2000)) item.show_free_shopping_icon();
+    if (getFreeShopping(total, 2000)) item.show_free_shopping_icon();
     else item.hide_free_shopping_icon();
   }
 }
