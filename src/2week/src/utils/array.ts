@@ -1,0 +1,1 @@
+export const push = (arr: any, item: any) => [...arr, item];
