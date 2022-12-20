@@ -1,1 +1,1 @@
-export const push = (arr: any, item: any) => [...arr, item];
+export const push = <T>(arr: T[], item: T) => [...arr, item];
