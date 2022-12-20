@@ -29,7 +29,7 @@ h1 {
   font-weight: normal;
   text-transform: uppercase;
   padding: 4px 20px;
-  float: left;
+  /* float: left; */
 }
 
 .clear {
@@ -71,7 +71,6 @@ button {
   color: #ffffff;
   text-transform: uppercase;
   float: right;
-  margin: 10px 0 5px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -111,4 +110,18 @@ span {
 
 p, .price {
   height: 20px;
+}
+.bottom {
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.bottom button {
+  text-align: right;
+}
+.bottom em {
+  display: none;
+  text-align: left;
 }
