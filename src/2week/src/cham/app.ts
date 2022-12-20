@@ -8,7 +8,7 @@ type Item = {
 let shoppingCart: Item[] = [];
 
 // 계산
-const getCart = (cart: Item[], item: Item) => {
+const addCart = (cart: Item[], item: Item) => {
   return [...cart, item]
 }
 
@@ -43,24 +43,18 @@ const updateShippingIcons = (cart: Item[], total: number) => {
   }
 }
 
+const changeItemTextColor = (item: Item, color: string) => {
+  const items = Array.from(document.querySelectorAll('.menu-name'))
+  const $item = items.find(el => el.textContent === item.name)
+  if ($item) $item.style.color = color
+}
+
 const showFreeShoppingIcon = (item: Item) => {
-  // todo: item의 무료배송 표시하는 동작
-  const items = document.querySelectorAll('.menu-name');
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].innerHTML === item.name) {
-      items[i].style.color = 'green';
-    }
-  }
+  changeItemTextColor(item, 'green')
 }
 
 const hideFreeShoppingIcon = (item: Item) => {
-  // todo: item의 무료배송 표시 숨기는 동작
-  const items = document.querySelectorAll('.menu-name');
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].innerHTML === item.name) {
-      items[i].style.color = 'inherit';
-    }
-  }
+  changeItemTextColor(item, 'inherit')
 }
 
 const setTaxDOM = (total: number) => {
@@ -78,7 +72,7 @@ document.querySelector('.items').addEventListener('click', ({ target }) => {
   const category = parent.querySelector('.category').textContent
   const price = parseInt(parent.querySelector('.price').textContent.replace(/,/g, ''))
   const item = createItem(name, category, price)
-  const newCart = getCart(shoppingCart, item)
+  const newCart = addCart(shoppingCart, item)
   const newTotal = getTotalPrice(newCart)
 
   saveCart(newCart);
