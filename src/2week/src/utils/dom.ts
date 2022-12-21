@@ -1,6 +1,6 @@
 type targetType = Document | HTMLElement | ParentNode | undefined;
 
-export const $ = <T extends HTMLElement, >(selector: string, target: targetType = document) => {
+export const $ = <T extends HTMLElement>(selector: string, target: targetType = document) => {
   const element = target.querySelector(selector) as T;
   if (!element) throw new Error("element not found");
   return element;
