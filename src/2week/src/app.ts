@@ -41,11 +41,11 @@ const update_shipping_icons = (total: number, item: Element) => {
 }
 
 // Calculate -------------------------------------------------
-const add_item_to_cart = (arr: CartType[], item: CartType) => push<CartType>(arr, item);
+export const add_item_to_cart = (arr: CartType[], item: CartType) => push<CartType>(arr, item);
 
-const calc_shopping_cart_total = (cart: CartType[]) => {
+export const calc_shopping_cart_total = (cart: CartType[]) => {
   return cart.reduce((acc, { price }) => (acc += price), 0);
 };
-const calc_total_tax = (total: number) => total * 0.1;
+export const calc_total_tax = (total: number) => total * 0.1;
 
-const is_free_delivery = (total: number) => total > 20_000;
+export const is_free_delivery = (total: number) => total > 20000;
