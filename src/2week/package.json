@@ -5,6 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "open": "cypress open",
     "test": "cypress run --browser chrome",
     "dev": "vite",
     "build": "tsc && vite build",
