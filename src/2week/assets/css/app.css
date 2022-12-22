@@ -112,3 +112,7 @@ span {
 p, .price {
   height: 20px;
 }
+
+.free-shipping {
+  display: none;
+}
