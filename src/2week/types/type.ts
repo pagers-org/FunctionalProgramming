@@ -1,5 +1,5 @@
-export interface ShoppingCart {
-  price: number;
-  category: string;
+export interface ShoppingCartType {
   name: string;
+  category: string;
+  price: number;
 }

@@ -1,87 +1,70 @@
-// 데이터
-import { ShoppingCart } from "./types/type";
-import { GetNumbersOnString } from "./utils/getNumbersOnString";
+interface ShoppingCartType {
+  name: string;
+  category: string;
+  price: number;
+}
 
-let shoppingCart: ShoppingCart[] = [];
-const setShoppingCart = (newShoppingCart: ShoppingCart[]) => {
-  shoppingCart = newShoppingCart;
-};
+let shoppingCart: ShoppingCartType[] = [];
 
-// const [shoppingCart, setShoppingCart] = State<Array<ShoppingCart>>([]);
-const TAX_RATE = 0.1;
+document.querySelectorAll('button').forEach(button =>
+  button.addEventListener('click', ({ target }) => {
+    // console.log(target);
+    const name = (target as Node).parentNode?.querySelector('.menu-name')?.textContent || '';
+    const category = (target as Node).parentNode?.querySelector('.category')?.textContent || '';
+    const price = (target as Node).parentNode?.querySelector('.price')?.textContent || '';
+    const priceNumber = getNumberFromString(price);
 
-// 클릭 액션
-document.querySelectorAll("button").forEach((button) =>
-  button.addEventListener("click", ({ target }) => {
-    const name =
-      (target as Node).parentNode?.querySelector(".menu-name")?.textContent ||
-      "";
-    const category =
-      (target as Node).parentNode?.querySelector(".category")?.textContent ||
-      "";
-    const price = GetNumbersOnString(
-      (target as Node).parentNode?.querySelector(".price")?.textContent || ""
-    );
-
-    setShoppingCart(addItemToCart({ name, category, price }));
-    handleDomUpdate();
-  })
+    addItemToCart({ name, category, price: priceNumber });
+    calcCartTotal();
+  }),
 );
 
-const addItemOnArray = <T>(array: T[], item: T): T[] => [...array, item];
-const getTotalFromArrayOfObject = <T>(array: T[], element: keyof T) =>
-  array.reduce((acc, cur) => acc + (cur[`${element}`] as any), 0);
+const calcCartTotal = () => {
+  const shoppingCartTotal = getTotalCartPrice(shoppingCart);
 
-const addItemToCart = (cartItem: ShoppingCart) =>
-  addItemOnArray<ShoppingCart>(shoppingCart, cartItem);
+  setCartTotalDom(shoppingCartTotal);
+  updateShippingIcons(shoppingCartTotal);
+  updateTaxDom(shoppingCartTotal);
+}
 
-const addShowOrHideShoppingIconOnArray = <T>(array: T[]) =>
-  array.map((item) => ({
-    ...item,
+const setCartTotalDom = (shoppingCartTotal: number) => (document.querySelector('.total-price') as HTMLElement).textContent = makeKorFormat(shoppingCartTotal);
+
+const updateShippingIcons = (shoppingCartTotal: number) => {
+  const buyButtons = getBuyButtonsDom();
+  buyButtons.forEach((buyButton) => {
+    if (isOver(buyButton.price + shoppingCartTotal, 20000)) buyButton.showFreeShoppingIcon();
+    else buyButton.hideFreeShoppingIcon();
+  })
+}
+
+const getBuyButtonsDom = () => {
+  return shoppingCart.map((cart) => ({
+    ...cart,
     showFreeShoppingIcon: () => {
-      console.log("DOM 의 아이콘을 보여줍니다");
+      (document.querySelectorAll('.free-shipping')).forEach((item) => (item as HTMLElement).style.display = 'block')
+      // console.log("DOM 의 아이콘을 보여줍니다");
     },
     hideFreeShoppingIcon: () => {
-      console.log("DOM 의 아이콘을 숨깁니다");
+      // console.log('DOM 의 아이콘을 숨깁니다');
     },
   }));
+}
 
-const handleDomUpdate = () => {
-  const shoppingCartPriceTotal = getTotalFromArrayOfObject<ShoppingCart>(
-    shoppingCart,
-    "price"
-  );
+const updateTaxDom = (shoppingCartTotal: number) => setTaxDom(shoppingCartTotal, getTax(shoppingCartTotal));
 
-  setCartTotalDom(shoppingCartPriceTotal);
-  updateShippingIcons(shoppingCartPriceTotal);
-  updateTaxDom(shoppingCartPriceTotal);
-};
+const setTaxDom = (shoppingCartTotal: number, tax: number) => (document.querySelector('.total-price') as HTMLElement).textContent = makeKorFormat(getTotalPrice(shoppingCartTotal, tax));
 
-const updateShippingIcons = (shoppingCartPriceTotal: number) => {
-  const buyButtons =
-    addShowOrHideShoppingIconOnArray<ShoppingCart>(shoppingCart);
+// 계산
+const TAX_RATE = 0.1;
 
-  buyButtons.forEach((buyButton) => {
-    if (buyButton.price + shoppingCartPriceTotal >= 20) {
-      buyButton.showFreeShoppingIcon();
-    } else {
-      buyButton.hideFreeShoppingIcon();
-    }
-  });
-};
+const addItemToCart = (item: ShoppingCartType) => shoppingCart = [...shoppingCart, item];
 
-// dom을 변경하는 로직
-const updateTaxDom = (shoppingCartTotal: number) =>
-  setTaxDom(updateTax(shoppingCartTotal));
-const updateTax = (price: number): number => price * TAX_RATE;
-const setTaxDom = (tax: number) => {
-  (
-    document.querySelector(".total-tax") as HTMLElement
-  ).textContent = `${tax}원₩`;
-};
+const getNumberFromString = (input: string) => Number(input.replace(/,|원/g, ''));
+const getTotalCartPrice = (cart: ShoppingCartType[]) => cart.reduce((prev, cur) => prev + cur.price, 0);
 
-const setCartTotalDom = (shoppingCartTotal: number) => {
-  (
-    document.querySelector(".total-price") as HTMLElement
-  ).textContent = `${shoppingCartTotal}원`;
-};
+const getTax = (price: number) => price * TAX_RATE;
+const getTotalPrice = (price: number, tax: number) => price + tax;
+
+const makeKorFormat = (price: number) => `${Intl.NumberFormat('ko-KR').format(price)}원`;
+
+const isOver = (input: number, value: number) => input >= value;
