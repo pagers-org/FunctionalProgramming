@@ -1,68 +1,75 @@
-var shopping_cart = [];
-var shopping_cart_total = 0;
+let shoppingCart = [];
+const $items = document.getElementsByClassName('item');
+
+// 1. 계산을 꺼내기
+// 2. 방어적 복사
+// 3. 유틸리티, 스키마, 비지니스 로직
+
+// 계산
+const addItemToCart = (cart, item) => [...cart, { ...item }];
+const getFreeShopping = (total, price) => total >= price;
+const getPriceWithTax = total => Math.floor(total * 1.1);
+const getTotalPrice = cart => cart.reduce((acc, item) => acc + item.price, 0);
+const getBuyButtonsDom = cart =>
+  cart.map(item => ({
+    ...item,
+    showFreeShoppingIcon,
+    // 무료 배송의 초기 display가 none이고, 장바구니에서 덜어내는 기능이 없으므로
+    // 구현하지 않음
+    hideFreeShoppingIcon() {
+      console.log('DOM 의 아이콘을 숨깁니다');
+    },
+  }));
+
+function showFreeShoppingIcon(name) {
+  for (const $item of $items) {
+    const content = $item.querySelector('span').textContent;
+    if (content === name) {
+      $item.querySelector('.free').style.display = 'inline';
+      break;
+    }
+  }
+}
+
+const setShopingCart = cart => {
+  shoppingCart = cart;
+};
+
+const setInitialFree = () => {
+  for (const $item of $items) {
+    $item.querySelector('p').innerHTML += '<span class="free" style="display: none">(무료 배송)</span>';
+  }
+};
+
+setInitialFree();
 
 document.querySelectorAll('button').forEach(button =>
   button.addEventListener('click', ({ target }) => {
     const name = target.parentNode.querySelector('.menu-name').textContent;
     const category = target.parentNode.querySelector('.category').textContent;
-    const price = target.parentNode.querySelector('.price').textContent;
-
-    add_item_to_cart({ name, category, price });
+    const price = Number(target.parentNode.querySelector('.price').textContent.replace('원', '').replace(',', ''));
+    const cart = addItemToCart(shoppingCart, { name, category, price });
+    setShopingCart(cart);
+    calcCartTotal(cart);
   }),
 );
 
-function add_item_to_cart(item) {
-  shopping_cart.push(item);
-  console.log(shopping_cart);
-  calc_cart_total();
+const calcCartTotal = cart => {
+  const total = getTotalPrice(cart);
+  const priceWithTax = getPriceWithTax(total);
+  setCartTotalDom(priceWithTax);
+  updateShippingIcons(cart, total);
+};
+
+function setCartTotalDom(total) {
+  document.querySelector('.total-price').textContent = total;
 }
 
-function calc_cart_total() {
-  shopping_cart_total = 0;
-  for (var i = 0; i < shopping_cart.length; i++) {
-    var item = shopping_cart[i];
-    shopping_cart_total += item.price;
-  }
-  set_cart_total_dom();
-  update_shipping_icons();
-  update_tax_dom();
-}
-
-function set_cart_total_dom() {
-  document.querySelector('.total-price').textContent = shopping_cart_total;
-}
-
-function update_shipping_icons() {
-  var buy_buttons = get_buy_buttons_dom();
+function updateShippingIcons(cart, total) {
+  var buy_buttons = getBuyButtonsDom(cart);
   for (var i = 0; i < buy_buttons.length; i++) {
     var item = buy_buttons[i];
-    console.log(item);
-    if (item.price + shopping_cart_total >= 20) item.show_free_shopping_icon();
-    else item.hide_free_shopping_icon();
+    if (getFreeShopping(total, 2000)) item.showFreeShoppingIcon(item.name);
+    else item.hideFreeShoppingIcon();
   }
-}
-
-function get_buy_buttons_dom() {
-  var buttons = [];
-
-  for (var i = 0; i < shopping_cart.length; i++) {
-    var item = shopping_cart[i];
-    item.show_free_shopping_icon = function () {
-      console.log('DOM 의 아이콘을 보여줍니다');
-    };
-    item.hide_free_shopping_icon = function () {
-      console.log('DOM 의 아이콘을 숨깁니다');
-    };
-    buttons.push(item);
-  }
-
-  return buttons;
-}
-
-function update_tax_dom() {
-  set_tax_dom(shopping_cart_total * 0.1);
-}
-
-function set_tax_dom(value) {
-  document.querySelector('.total-price').textContent = value;
 }
