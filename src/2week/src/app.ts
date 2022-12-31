@@ -1,6 +1,13 @@
-import { $, setTotalPriceOfCart, updateShippingIconsOfCart } from './utils/dom';
 import { createItem } from './utils/item';
 import { addItemToCart, Cart } from './utils/cart';
+
+
+import { CartType } from "Cart";
+import { $, $$ } from "./utils/dom";
+import { push } from "./utils/array";
+import { toNumber, toCommaNumber } from "./utils/format";
+import { MIN_TOTAL, TAX_RATE } from './constants/index';
+
 import { cloneDeep } from 'lodash-es';
 
 let shoppingCart: Cart = [];
