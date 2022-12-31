@@ -120,6 +120,7 @@ p,
 .price {
   height: 20px;
 }
+
 .bottom {
   height: 45px;
   display: flex;
@@ -127,6 +128,12 @@ p,
   flex-direction: row-reverse;
   align-items: center;
 }
+
 .bottom button {
   text-align: right;
+}
+
+.bottom em {
+  display: none;
+  text-align: left;
 }
