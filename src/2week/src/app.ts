@@ -1,8 +1,8 @@
 
+import { CartType } from "Cart";
 import { $, $$ } from "./utils/dom";
 import { push } from "./utils/array";
 import { toNumber, toCommaNumber } from "./utils/format";
-import { CartType } from "./types/cart";
 import { MIN_TOTAL, TAX_RATE } from './constants/index';
 
 let shopping_cart: CartType[] = [];
