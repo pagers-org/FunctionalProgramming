@@ -7,7 +7,7 @@ describe('FECrash 카페', () => {
     const cart = [...Array(CART_LENGTH).fill({ name: '바닐라 라떼', category: 'C', price: 바닐라_라떼_PRICE })];
     
     
-    it('장바구니에 아이템이 추가되어야 한다.', () => {
+    it('장바구니에 아이템이 추가된 새로운 배열을 반환한다.', () => {
       const product = {
         name: '커피',
         category: 'C',
