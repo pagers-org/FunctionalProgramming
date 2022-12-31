@@ -35,11 +35,12 @@ const set_cart_total_dom = (total: number) => {
 };
 const update_shipping_icons = (total: number, item: Element) => {
   const free_icon = $<HTMLEmbedElement>('.free-delivery', item);
+
   if (is_free_delivery(total)) {
     free_icon.style.display = 'block';
-  } else {
-    free_icon.style.display = 'none';
+    return;
   }
+  free_icon.style.display = 'none';
 }
 
 // Calculate -------------------------------------------------
