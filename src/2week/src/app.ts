@@ -1,7 +1,9 @@
+
 import { $, $$ } from "./utils/dom";
 import { push } from "./utils/array";
 import { toNumber, toCommaNumber } from "./utils/format";
 import { CartType } from "./types/cart";
+import { MIN_TOTAL } from './constants/index';
 
 let shopping_cart: CartType[] = [];
 
@@ -48,4 +50,4 @@ export const calc_shopping_cart_total = (cart: CartType[]) => {
 };
 export const calc_total_tax = (total: number) => total * 0.1;
 
-export const is_free_delivery = (total: number) => total > 20000;
+export const is_free_delivery = (total: number) => total > MIN_TOTAL;
