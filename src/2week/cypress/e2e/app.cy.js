@@ -1,3 +1,12 @@
+import { toNumber, calc_total_tax } from "../support/e2e";
+
+const getDOMItemPrice = (index = 0) => {
+  return cy.get('p > span.price')
+    .eq(index)
+    .invoke('text')
+    .then((text) => toNumber(text));
+}
+
 describe('FECrash 카페', () => {
   beforeEach(() => {
     cy.visit({
@@ -13,13 +22,16 @@ describe('FECrash 카페', () => {
   });
 
   context('상품 추가하여 장바구니 확인', () => {
-    it('첫번째 상품을 장바구니에 추가할 경우 장바구니엔 1,100원이 표시되야 한다.', () => {
+    it('첫번째 상품을 장바구니에 추가할 경우 장바구니엔 첫 번째 상품 가격에 부가세가 포함된 가격이 표시되야 한다.', () => {
       cy.get('.add-to-cart').first().click();
-      cy.get('.total-price').should('have.text', '1,100원');
-    });
-    it('모든 상품을 하나씩 추가할 경우 장바구니엔 61,270원이 표시되야 한다.', () => {
-      cy.get('.add-to-cart').click({ multiple: true });
-      cy.get('.total-price').should('have.text', '61,270원');
+      
+      getDOMItemPrice(0).then((price) => {
+        const itemPrice = price + calc_total_tax(price); //TODO: 비즈니스 로직에서도 사용되는 부분이라 분리하면 좋을 듯
+
+        cy.get('.total-price').invoke('text').then((total) => {
+          expect(itemPrice).to.equal(toNumber(total));
+        });
+      })
     });
   });
 

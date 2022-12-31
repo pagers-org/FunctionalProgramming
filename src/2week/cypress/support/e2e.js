@@ -19,4 +19,6 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-export  { add_item_to_cart, calc_shopping_cart_total, calc_total_tax, is_free_delivery } from '../../src/app';
+export { add_item_to_cart, calc_shopping_cart_total, calc_total_tax, is_free_delivery } from '../../src/app';
+
+export { toNumber, toCommaNumber } from '../../src/utils/format';
