@@ -3,7 +3,7 @@ import { $, $$ } from "./utils/dom";
 import { push } from "./utils/array";
 import { toNumber, toCommaNumber } from "./utils/format";
 import { CartType } from "./types/cart";
-import { MIN_TOTAL } from './constants/index';
+import { MIN_TOTAL, TAX_RATE } from './constants/index';
 
 let shopping_cart: CartType[] = [];
 
@@ -48,6 +48,6 @@ export const add_item_to_cart = (arr: CartType[], item: CartType) => push<CartTy
 export const calc_shopping_cart_total = (cart: CartType[]) => {
   return cart.reduce((acc, { price }) => (acc += price), 0);
 };
-export const calc_total_tax = (total: number) => total * 0.1;
+export const calc_total_tax = (total: number) => total * TAX_RATE;
 
 export const is_free_delivery = (total: number) => total > MIN_TOTAL;
