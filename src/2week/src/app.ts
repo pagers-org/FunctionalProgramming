@@ -22,7 +22,30 @@ $('[data-type="items"]').addEventListener('click', ({ target }) => {
 
   const addedCart = addItemToCart(cartClone, item);
 
-  setTotalPriceOfCart(addedCart);
-  updateShippingIconsOfCart(addedCart);
-  shoppingCart = addedCart;
-});
+    update_shipping_icons(total_cart, item);
+  })
+);
+
+// Action ----------------------------------------------------
+const set_cart_total_dom = (total: number) => {
+  $<HTMLSpanElement>('.total-price').textContent = `${toCommaNumber(total)}원`;
+};
+const update_shipping_icons = (total: number, item: Element) => {
+  const free_icon = $<HTMLEmbedElement>('.free-delivery', item);
+
+  if (is_free_delivery(total)) {
+    free_icon.style.display = 'block';
+    return;
+  }
+  free_icon.style.display = 'none';
+}
+
+// Calculate -------------------------------------------------
+export const add_item_to_cart = (arr: CartType[], item: CartType) => push<CartType>(arr, item);
+
+export const calc_shopping_cart_total = (cart: CartType[]) => {
+  return cart.reduce((acc, { price }) => (acc += price), 0);
+};
+export const calc_total_tax = (total: number) => total * TAX_RATE;
+
+export const is_free_delivery = (total: number) => total > MIN_TOTAL;
