@@ -1,12 +1,15 @@
 import { add_item_to_cart, calc_shopping_cart_total, calc_total_tax, is_free_delivery } from '../support/e2e';
 
 describe('FECrash 카페', () => {
+  const CART_LENGTH = 100;
+  const 바닐라_라떼_PRICE = 3000;
+  let cart = [];
+
+  beforeEach(() => {
+    cart = [...Array(CART_LENGTH).fill({ name: '바닐라 라떼', category: 'C', price: 바닐라_라떼_PRICE })];
+  });
+
   context('Calculate 함수 값 확인', () => {
-    const CART_LENGTH = 100;
-    const 바닐라_라떼_PRICE = 3000;
-    const cart = [...Array(CART_LENGTH).fill({ name: '바닐라 라떼', category: 'C', price: 바닐라_라떼_PRICE })];
-    
-    
     it('장바구니에 아이템이 추가된 새로운 배열을 반환한다.', () => {
       const product = {
         name: '커피',
