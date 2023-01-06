@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "test": "cypress run --browser chrome"
   },

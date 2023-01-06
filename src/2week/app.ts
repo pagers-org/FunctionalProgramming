@@ -1,49 +1,17 @@
+import { calc_KRW_total, number_to_KRW } from "./util.js";
 // ========= 타입선언 =========
-
 type Item = {
   name: string;
   price: string;
 };
 // ========= 타입선언 =========
-const FREE_SHIPPING_ICON = "free-shopping-icon";
 
+const FREE_SHIPPING_ICON = "free-shopping-icon";
 let shopping_cart: Item[] = [];
 
 // ========= 액션 =========
-
 const get_all_items_button_dom = (): NodeListOf<Element> =>
   document.querySelectorAll("button");
-
-const add_item_to_cart = (item: Item) => {
-  shopping_cart = add_element_last(shopping_cart, item);
-
-  const cart_total = calc_cart_total(shopping_cart);
-
-  set_text_content_to_dom(
-    ".total-price",
-    `합계 : ${number_to_KRW(cart_total)}`
-  );
-  update_tax_dom(cart_total);
-  update_shipping_icons(shopping_cart);
-};
-
-// 각각의 아이템에 대해 무료배송가능한지에 대한 여부를 확인후 아이템에 아이콘을 보여주거나 숨긴다.
-const update_shipping_icons = (cart: Item[]) => {
-  const $items = get_items_dom();
-
-  for (let i = 0; i < $items.length; i++) {
-    const $item = $items[i];
-    if (!$item) throw new Error("can not find item dom");
-
-    const item = get_item_info_from_dom($item);
-    if (!item) throw new Error("can not get item info");
-
-    const tempCart = add_element_last(cart, item);
-    gets_free_shipping(tempCart)
-      ? show_free_shopping_icon($item)
-      : hide_free_shopping_icon($item);
-  }
-};
 
 // 아이템 dom 리스트를 반환한다.
 const get_items_dom = () => {
@@ -60,16 +28,20 @@ const get_items_dom = () => {
   return $items;
 };
 
-// 새금을 구해서 택스 돔을 업데이트함
-const update_tax_dom = (total: number) => {
-  const totalTax = calc_tax(total, 0.1);
-  set_text_content_to_dom(".tax-price", `세금 : ${number_to_KRW(totalTax)}`);
-};
+const get_item_info_from_dom = ($parentNode: ParentNode): Item | undefined => {
+  if (!$parentNode) {
+    return;
+  }
+  const $name = $parentNode.querySelector(".menu-name");
+  const $price = $parentNode.querySelector(".price");
 
-const set_text_content_to_dom = (selectors: string, content: string) => {
-  const $dom = document.querySelector(selectors);
-  if ($dom) {
-    $dom.textContent = content;
+  if ($name && $price) {
+    const name = $name.textContent;
+    const price = $price.textContent;
+    if (name && price) {
+      const item = make_cart_item(name, price);
+      return item;
+    }
   }
 };
 
@@ -92,20 +64,21 @@ const hide_free_shopping_icon = (item: ParentNode) => {
   }
 };
 
-const get_item_info_from_dom = ($parentNode: ParentNode): Item | undefined => {
-  if (!$parentNode) {
-    return;
-  }
-  const $name = $parentNode.querySelector(".menu-name");
-  const $price = $parentNode.querySelector(".price");
+// 각각의 아이템에 대해 무료배송가능한지에 대한 여부를 확인후 아이템에 아이콘을 보여주거나 숨긴다.
+const update_shipping_icons = (cart: Item[]) => {
+  const $items = get_items_dom();
 
-  if ($name && $price) {
-    const name = $name.textContent;
-    const price = $price.textContent;
-    if (name && price) {
-      const item = make_cart_item(name, price);
-      return item;
-    }
+  for (let i = 0; i < $items.length; i++) {
+    const $item = $items[i];
+    if (!$item) throw new Error("can not find item dom");
+
+    const item = get_item_info_from_dom($item);
+    if (!item) throw new Error("can not get item info");
+
+    const tempCart = add_element_last(cart, item);
+    gets_free_shipping(tempCart)
+      ? show_free_shopping_icon($item)
+      : hide_free_shopping_icon($item);
   }
 };
 
@@ -113,23 +86,21 @@ const get_item_info_from_dom = ($parentNode: ParentNode): Item | undefined => {
 
 // ========= 계산 =========
 
-const KRW_to_number = (krw: string) => {
-  const krwNumber = Number(krw.replace(/[^0-9]+/g, ""));
-  return Number.isNaN(krwNumber) ? 0 : krwNumber;
+const calc_total = (cart: Item[]) => {
+  const cart_total = calc_cart_total(cart);
+  const cart_tax = calc_tax(cart_total, 0.1);
+
+  return cart_total + cart_tax;
 };
 
-const number_to_KRW = (krwNumber: number) => {
-  const krw = `${krwNumber.toLocaleString()}원`;
-  return krw;
+const add_item_to_cart = (cart: Item[], item: Item) => {
+  return add_element_last(cart, item);
 };
 
-const calc_KRW_total = (priceList: string[]): number => {
-  return priceList.reduce((acc, curr) => acc + KRW_to_number(curr), 0);
-};
-
-const calc_tax = (totalPrice: number, taxRate: number) => {
-  return totalPrice * taxRate;
-};
+const make_cart_item = (name: string, price: string): Item => ({
+  name,
+  price,
+});
 
 // 카트의 가격총합계를 구한다.
 const calc_cart_total = (cart: Item[]) => {
@@ -138,20 +109,25 @@ const calc_cart_total = (cart: Item[]) => {
   return CART_TOTAL;
 };
 
-const make_cart_item = (name: string, price: string): Item => ({
-  name,
-  price,
-});
-
-const gets_free_shipping = (cart: Item[]) => calc_cart_total(cart) >= 20000;
+const gets_free_shipping = (cart: Item[]) => calc_total(cart) >= 20000;
 
 const add_element_last = <T>(array: T[], elem: T): T[] => [...array, elem];
 
+const calc_tax = (totalPrice: number, taxRate: number) => {
+  return totalPrice * taxRate;
+};
+
 // ========= 계산 =========
+
+// DOM과 관련된 조작은 이벤트 콜백 함수내에서만 처리해줌
+// 1. 버튼 클릭 이벤트 핸들러 등록
+// 2. 카트의 총 가격을 구한 뒤 dom 업데이트
+// 3. 각 버튼에 대한 free shipping icon 보여주기
 
 const init = () => {
   const $buttons = get_all_items_button_dom();
   $buttons.forEach(($button) => {
+    // 1. 버튼 클릭 이벤트 핸들러 등록
     return $button.addEventListener("click", () => {
       if (!$button?.parentNode) {
         return;
@@ -160,7 +136,18 @@ const init = () => {
       const item = get_item_info_from_dom($button.parentNode);
 
       if (item) {
-        add_item_to_cart(item);
+        shopping_cart = add_item_to_cart(shopping_cart, item);
+
+        console.log(shopping_cart);
+        // 2. 카트의 총 가격을 구한 뒤 dom 업데이트
+        const total_price = calc_total(shopping_cart);
+        const $dom = document.querySelector(".total-price");
+        if ($dom) {
+          $dom.textContent = `합계(세금포함) : ${number_to_KRW(total_price)}`;
+        }
+
+        // 3. 각 버튼에 대한 free shipping icon 보여주기
+        update_shipping_icons(shopping_cart);
       }
     });
   });
