@@ -1,3 +1,3 @@
-import { addItemToCart } from "./jeong/app";
+import { play } from "./jeong/app";
 
-addItemToCart();
+play();
