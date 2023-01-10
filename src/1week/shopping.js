@@ -21,9 +21,7 @@ function showOrHideButton(price, shopping_cart_total, button) {
   }
 }
 
-//계산
-const isOver = (price, shopping_cart_total, number) =>
-  price + shopping_cart_total >= number;
+const isOver = (price, shopping_cart_total, number) => price + shopping_cart_total >= number;
 
 // function update_tax_dom(shopping_cart_total) {
 //   set_tax_dom(shopping_cart_total * 0.1);
@@ -33,8 +31,8 @@ const isOver = (price, shopping_cart_total, number) =>
 const calcTax = (shopping_cart_total) => shopping_cart_total * 0.1;
 
 //계산
-const count_calc_total = (cart) =>
-  cart.reduce((prev, curr) => prev + curr.price, 0);
+const count_calc_total = (cart) => cart.reduce((prev, curr) => prev + curr.price, 0);
+
 
 function calcCartTotal(cart) {
   const shopping_cart_total = count_calc_total(cart);
