@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
+<html lang="en">
+    <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,16 +9,19 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/app.css" />
   </head>
-
   <body>
     <div class="wrapper">
       <h1>FECrash 카페</h1>
       <div class="carts">
-        <span class="icons"><i class="shopping-cart"></i></span>
+        <div class='icon-box'>
+          <img class="free-shipping" src="./assets/image/svg/free.svg" alt="freeIcon" />
+          <span class="icons"><i class="shopping-cart"></i></span>
+        </div>
+        
         <span class="cart-price">0원</span>
         <span class="tax">0원</span>
         <span class="total-price">0원</span>
-        <img class="free-shipping" src="../2week/assets/image/svg/free.svg" alt="freeIcon" />
+        
       </div>
 
       <div class="clear"></div>
@@ -107,6 +110,7 @@
         </div>
       </div>
     </div>
-    <script type="module" src="app.js"></script>
+    <div id="app"></div>
+    <script type="module" src="/src/app.ts"></script>
   </body>
 </html>

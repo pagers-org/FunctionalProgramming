@@ -116,3 +116,9 @@ p, .price {
 .free-shipping {
   display: none;
 }
+
+.icon-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
