@@ -1,4 +1,3 @@
-
 import { CartType } from "Cart";
 import { $, $$ } from "./utils/dom";
 import { push } from "./utils/array";

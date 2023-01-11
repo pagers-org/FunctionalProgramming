@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #F2EEE9;
+  background-color: #f2eee9;
   font: normal 13px/1.5 Georgia, Serif;
   color: #333;
 }
@@ -19,6 +19,14 @@ body {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+}
+
+.price-info {
+  display: flex;
+  gap: 12px;
+}
+.free-delivery {
+  visibility: hidden;
 }
 
 h1 {
@@ -67,7 +75,7 @@ button {
   border: none;
   border-radius: 8px;
   padding: 4px 14px;
-  background-color: #00A29E;
+  background-color: #00a29e;
   color: #ffffff;
   text-transform: uppercase;
   float: right;
@@ -81,7 +89,7 @@ button {
 }
 
 button:hover {
-  background-color: #00C6C2;
+  background-color: #00c6c2;
 }
 
 button:active {
@@ -103,12 +111,13 @@ span {
 .category {
   border-radius: 8px;
   background-color: #fff;
-  border: 1px solid #00A29E;
-  color: #00A29E;
+  border: 1px solid #00a29e;
+  color: #00a29e;
   padding: 6px;
 }
 
-p, .price {
+p,
+.price {
   height: 20px;
 }
 
