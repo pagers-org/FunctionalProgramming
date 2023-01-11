@@ -1,0 +1,13 @@
+{
+  "name": "fecrash-cafe",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "cypress run --browser chrome"
+  },
+  "devDependencies": {
+    "cypress": "^12.1.0"
+  }
+}
