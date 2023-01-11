@@ -1,13 +1,9 @@
-const cookAndEat = (obj, ...func) => {
-  const foods = obj;
-  const [cook, eat] = func;
-
-  for (let i = 0; i < foods.length; i++) {
-    let food = foods[i];
-    const dish = cook(food);
-    return empty_foods;
-  }
-};
+//기존 코드
+for (var i = 0; i < foods.length; i++) {
+  var food = foods[i];
+  cook(food);
+  eat(food);
+}
 
 for (var i = 0; i < dishes.length; i++) {
   var dish = dishes[i];
@@ -16,41 +12,42 @@ for (var i = 0; i < dishes.length; i++) {
   putAway(dish);
 }
 
-//
-
-const customMap = (arr, func) => {
-  const newArr = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    let el = arr[i];
-    newArr.push(func(el));
+//리팩토링 1단계: 암묵적 인자 명시적으로 바꾸기
+const cookAndEatArray = (arr) => {
+  for (var i = 0; i < arr.length; i++) {
+    var item = arr[i];
+    cookAndEatFood(item);
   }
-
-  return newArr;
 };
+const cookAndEat = (food) => {
+  cook(food);
+  eat(food);
+};
+cookAndEatArray(foods);
 
-const customFilter = (arr, func) => {
-  let newArr = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    let el = arr[i];
-    if (func(el)) {
-      newArr.push(el);
-    }
+const cleanArray = (arr) => {
+  for (var i = 0; i < arr.length; i++) {
+    var item = arr[i];
+    cleanDishes(item);
   }
-
-  return newArr;
 };
+const cleanDishes = (dish) => {
+  wash(dish);
+  dry(dish);
+  putAway(dish);
+};
+cleanArray(dishes);
 
-const customReduce = (arr, func) => {
-  let newArr = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    let el = arr[i];
-    if (func(el)) {
-      newArr.push(el);
-    }
+// 리팩토링 2단계: 비슷하지만 완전히 같게 작동하지는 함수들을 처리하기 위해 함수를 인자로 받기(고차함수로 만들기)
+const operateOnArray = (arr, f) => {
+  for (var i = 0; i < arr.length; i++) {
+    var item = arr[i];
+    f(item);
   }
-
-  return newArr;
 };
+const cookAndEat = (food) => {
+  cook(food);
+  eat(food);
+};
+cookAndEatArray(foods, cookAndEat);
+cookAndEatArray(foods, cleanDishes);
