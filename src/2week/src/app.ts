@@ -10,9 +10,9 @@ let totalWithTax: number = 0;
 
 document.querySelectorAll('button').forEach((button) => 
   button.addEventListener('click', ({ target }) => {
-    const name = (target as Node).parentNode?.querySelector('.menu-name')?.textContent || '';
-    const category = (target as Node).parentNode?.querySelector('.category')?.textContent || '';
-    const price = (target as Node).parentNode?.querySelector('.price')?.textContent || '';
+    const name = getNodeByClassName(target, '.menu-name');
+    const category = getNodeByClassName(target, '.category');
+    const price = getNodeByClassName(target, '.price');
 
     const cart = addItemToCart({ name, category, price }, shoppingCart);
     const cartTotal = sum(total, stringToNumber(price));
@@ -26,7 +26,7 @@ document.querySelectorAll('button').forEach((button) =>
     
     updateDom('.cart-price', cartTotal);
     updateDom('.tax', tax);
-    updateDom('.total-price', total);
+    updateDom('.total-price', totalWithTax);
     updateShippingIcons(total);
   })
 );
@@ -38,5 +38,7 @@ const getTax = (price: number) => price * TAX_RATE;
 const updateShippingIcons = (total: number) => {
   if (isOver(total)) (document.querySelector('.free-shipping') as HTMLElement).style.display = 'block';
 };
+
+const getNodeByClassName = (target: EventTarget | null, className: string) => (target as Node).parentNode?.querySelector(className)?.textContent || '';
 
 const updateDom = (classname: string, money: number) => (document.querySelector(classname) as HTMLElement).textContent = makeKorFormat(money);
