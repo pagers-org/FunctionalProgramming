@@ -26,7 +26,7 @@ document.querySelectorAll('button').forEach((button) =>
     
     updateDom('.cart-price', cartTotal);
     updateDom('.tax', tax);
-    updateDom('.total-price', total);
+    updateDom('.total-price', totalWithTax);
     updateShippingIcons(total);
   })
 );
