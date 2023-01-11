@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F2EEE9;
+  font: normal 13px/1.5 Georgia, Serif;
+  color: #333;
+}
+
+.wrapper {
+  width: 705px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.carts {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+h1 {
+  display: inline-block;
+  background-color: #333;
+  color: #fff;
+  font-size: 20px;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding: 4px 20px;
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
+.items {
+  display: block;
+  margin: 20px 0;
+}
+
+.item {
+  background-color: #fff;
+  float: left;
+  margin: 0 10px 10px 0;
+  width: 205px;
+  padding: 10px;
+  height: 310px;
+}
+
+.item img {
+  display: block;
+  margin: auto;
+}
+
+h2 {
+  font-size: 16px;
+  display: block;
+  border-bottom: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  padding: 10px 0;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 4px 14px;
+  background-color: #00A29E;
+  color: #ffffff;
+  text-transform: uppercase;
+  float: right;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.icons:hover {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #00C6C2;
+}
+
+button:active {
+  background-color: #005857;
+}
+
+span {
+  float: right;
+}
+
+.shopping-cart {
+  display: inline-block;
+  background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px 0 0;
+}
+
+.category {
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid #00A29E;
+  color: #00A29E;
+  padding: 6px;
+}
+
+p, .price {
+  height: 20px;
+}
