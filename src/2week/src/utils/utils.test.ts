@@ -6,10 +6,7 @@ describe('utils test', () => {
   });
 
   test('sum', () => {
-    expect(sum(500,500)).toEqual(1000);
-  });
-
-  test('1 is 1', () => {
-    expect(1).toBe(1);
+    expect(sum(500, 500)).toEqual(1000);
   });
 });
+
