@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "jest",
+    "test": "jest --verbose",
     "cypress:open": "cypress open",
     "cypress": "cypress run --browser chrome"
   },
