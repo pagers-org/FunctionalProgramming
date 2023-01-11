@@ -1,28 +1,49 @@
-import { $, setTotalPriceOfCart, updateShippingIconsOfCart } from './utils/dom';
-import { createItem } from './utils/item';
-import { addItemToCart, Cart } from './utils/cart';
-import { cloneDeep } from 'lodash-es';
+import { CartType } from "Cart";
+import { $, $$ } from "./utils/dom";
+import { push } from "./utils/array";
+import { toNumber, toCommaNumber } from "./utils/format";
+import { MIN_TOTAL, TAX_RATE } from './constants/index';
 
-let shoppingCart: Cart = [];
+let shopping_cart: CartType[] = [];
 
-$('[data-type="items"]').addEventListener('click', ({ target }) => {
-  const targetEl = target as Element;
-  const dataType = targetEl.getAttribute('data-type');
-  if (dataType !== 'add-cart-btn') return;
+$$('.add-to-cart').forEach(button =>
+  button.addEventListener('click', ({target}) => {
+    const item = (target as Element).closest('.item');
+    
+    if (!item) return;
+    const name = $('.menu-name', item).textContent;
+    const category = $('.category', item).textContent;
+    const price = $('.price', item).textContent;
 
-  const itemEl = targetEl.closest('.item');
-  if (!itemEl) return;
-  const name = $('.menu-name', itemEl).textContent;
-  const category = $('.category', itemEl).textContent;
-  const price = $('.price', itemEl).textContent;
+    if (!(name && category && price)) return;
+    const copyCart = [...shopping_cart];
+    shopping_cart = add_item_to_cart(copyCart, { name, category, price: toNumber(price) });
 
-  if (!(name && category && price)) return;
-  const item = createItem(name, category, price);
-  const cartClone = cloneDeep(shoppingCart);
+    const current_cart_total = calc_shopping_cart_total(shopping_cart);
+    const total_tax = calc_total_tax(current_cart_total);
+    const total_cart = current_cart_total + total_tax;
+    set_cart_total_dom(total_cart);
 
-  const addedCart = addItemToCart(cartClone, item);
+    update_shipping_icons(total_cart, item);
+  })
+);
 
-  setTotalPriceOfCart(addedCart);
-  updateShippingIconsOfCart(addedCart);
-  shoppingCart = addedCart;
-});
+// Action ----------------------------------------------------
+const set_cart_total_dom = (total: number) => {
+  $<HTMLSpanElement>('.total-price').textContent = `${toCommaNumber(total)}원`;
+};
+const update_shipping_icons = (total: number, item: Element) => {
+  const free_icon = $<HTMLEmbedElement>('.free-delivery', item);
+  const css = is_free_delivery(total) ? 'block' : 'none';
+  free_icon.style.display = css;
+}
+
+// Calculate -------------------------------------------------
+export const add_item_to_cart = (arr: CartType[], item: CartType) => push<CartType>(arr, item);
+
+export const calc_shopping_cart_total = (cart: CartType[]) => {
+  return cart.reduce((acc, { price }) => (acc += price), 0);
+};
+export const calc_total_tax = (total: number) => total * TAX_RATE;
+
+export const is_free_delivery = (total: number) => total > MIN_TOTAL;
