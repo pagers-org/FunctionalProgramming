@@ -1,21 +1,22 @@
 // 기존 메소드
 nums = [1, 2, 3, 4, 5];
-const map = nums.map((a, b) => a + b);
+const map = nums.map((el) => el * 2);
 
 console.log(map);
 
 console.log("--------------");
 
 // 커스텀
-const customMap = (arr, f) => {
+Array.prototype.customMap = function (f) {
   const newArr = [];
-  for (var i = 0; i < arr.length; i++) {
-    var item = arr[i];
+
+  for (var i = 0; i < this.length; i++) {
+    var item = this[i];
     newArr.push(f(item));
   }
   return newArr;
 };
 
 // test print
-console.log(customMap([1, 2, 3, 4, 5], (el) => el * 2));
+console.log(nums.customMap((el) => el * 2));
 // [ 2, 4, 6, 8, 10 ]
