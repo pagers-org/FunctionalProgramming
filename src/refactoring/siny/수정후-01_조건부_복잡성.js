@@ -1,70 +1,57 @@
-const getAnimalEmoji = animal => {
-  if (animal === 'dog') {
-    return '🐶';
-  } else if (animal === 'cat') {
-    return '🐱';
-  } else if (animal === 'frog') {
-    return '🐸';
-  } else if (animal === 'panda') {
-    return '🐼';
-  } else if (animal === 'giraffe') {
-    return '🦒';
-  } else if (animal === 'monkey') {
-    return '🐵';
-  } else if (animal === 'unicorn') {
-    return '🦄';
-  } else if (animal === 'dragon') {
-    return '🐲';
-  }
+const ANIMAL_MAP = {
+  dog: '🐶',
+  cat: '🐱',
+  frog: '🐸',
+  panda: '🐼',
+  giraffe: '🦒',
+  monkey: '🐵',
+  unicorn: '🦄',
+  dragon: '🐲',
 };
+
+const getAnimalEmoji = animal => ANIMAL_MAP[animal];
+
 console.log(getAnimalEmoji('dragon'));
 
-const printMyAnimal = animal => {
-  if (animal === 'dog' || animal === 'cat') {
+const myAnimals = ['dog', 'cat'];
+const hasIn = (arr, item) => arr.includes(item);
+const printMyAnimal = myAnimals => animal => {
+  if (hasIn(myAnimals, animal)) {
     console.log(`I have a ${animal}`);
   }
 };
-console.log(printMyAnimal('dog'));
+console.log(printMyAnimal(myAnimals)('dog'));
 
 const getAnimalDetails = animal => {
-  let result;
-
-  if (animal) {
-    if (animal.type) {
-      if (animal.name) {
-        if (animal.gender) {
-          result = `${animal.name} is a ${animal.gender} ${animal.type}`;
-        } else {
-          result = 'No animal gender';
-        }
-      } else {
-        result = 'No animal name';
-      }
-    } else {
-      result = 'No animal type';
-    }
-  } else {
-    result = 'No animal';
+  if (!animal) {
+    return 'No animal';
   }
-
-  return result;
+  if (!animal.type) {
+    return 'No animal type';
+  }
+  if (!animal.name) {
+    return 'No animal name';
+  }
+  if (!animal.gender) {
+    return 'No animal gender';
+  }
+  return `${animal.name} is a ${animal.gender} ${animal.type}`;
 };
 console.log(getAnimalDetails());
 console.log(getAnimalDetails({ type: 'dog', gender: 'female' }));
 console.log(getAnimalDetails({ type: 'dog', name: 'Lucy' }));
 console.log(getAnimalDetails({ type: 'dog', name: 'Lucy', gender: 'female' }));
 
+const COLOR_MAP = {
+  red: ['apple', 'strawberry'],
+  yellow: ['banana', 'pineapple'],
+  purple: ['grape', 'plum'],
+};
+
+COLOR_MAP.default = [];
+
 const printFruits = color => {
-  switch (color) {
-    case 'red':
-      return ['apple', 'strawberry'];
-    case 'yellow':
-      return ['banana', 'pineapple'];
-    case 'purple':
-      return ['grape', 'plum'];
-    default:
-      return [];
-  }
+  return COLOR_MAP[color] ?? COLOR_MAP.default;
 };
 console.log(printFruits(null));
 console.log(printFruits('yellow'));

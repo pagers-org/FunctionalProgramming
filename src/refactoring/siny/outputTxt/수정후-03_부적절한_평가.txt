@@ -1,0 +1,7 @@
+Order: 1
+                Client: siny
+                Product: shirts
+                TotalAmount: 94
+                
+                
+                Arrival in: 5 days.

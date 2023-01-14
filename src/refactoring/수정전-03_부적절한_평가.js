@@ -10,7 +10,7 @@ const Client = ({ name, type, location }) => {
   this.location = location;
 
   getName = () => this.name;
-  getType = () => this.name;
+  getType = () => this.type;
   getLocation = () => this.location;
   getPriceByProduct = product => product.value - per2Int(product.value, this.offers[this.type]);
 
@@ -52,13 +52,14 @@ const Order = ({ id, value, client, product }) => {
   getValue = () => this.value;
   getClient = () => this.client;
   getProduct = () => this.product;
-  getTaxes = loc => this.getTaxes(this.taxes[loc]);
+  getTaxes = loc => this.taxes[loc];
 
   return {
     getId,
     getValue,
     getClient,
     getProduct,
+    getTaxes,
   };
 };
 
@@ -67,7 +68,7 @@ const Summary = ({ order }) => {
 
   printSummary = () => {
     let client = order.getClient();
-    let product = order.product();
+    let product = order.getProduct();
 
     return `Order: ${order.getId()}
                 Client: ${client.getName()}
@@ -75,10 +76,27 @@ const Summary = ({ order }) => {
                 TotalAmount: ${client.getPriceByProduct(product) + this.order.getTaxes(client.getLocation())}
                 
                 
-                Arrival in: ${this.order.product.getShipping()} days.`;
+                Arrival in: ${product.getShipping()} days.`;
   };
 
   return {
     printSummary,
   };
 };
+const mockProduct = {
+  value: 100,
+  name: 'shirts',
+  shipping: 5,
+};
+const client1 = Client({ name: 'siny', type: 'premium', location: 'USA' });
+const product1 = Product(mockProduct);
+const order1 = Order({
+  id: '1',
+  value: '???',
+  product: product1,
+  client: client1,
+});
+
+const summary = Summary({ order: order1 });
+
+console.log(summary.printSummary());
