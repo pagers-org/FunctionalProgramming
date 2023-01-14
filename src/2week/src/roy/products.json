@@ -1,54 +1,54 @@
 [
   {
-    "src": "/assets/image/coffee/오늘의_커피.jpeg",
+    "src": "/assets/image/coffee/today_coffee.jpeg",
     "category": "C",
     "name": "오늘의 커피",
     "price": 1000
   }, 
   {
-    "src": "/assets/image/coffee/나이트로_바닐라_크림.jpeg",
+    "src": "/assets/image/coffee/nitro_vanilla_cream.jpeg",
     "category": "C",
     "name": "나이트로 바닐라 크림",
     "price": 3500
   },
   {
-    "src": "/assets/image/coffee/나이트로_콜드_브루.jpeg",
+    "src": "/assets/image/coffee/nitro_cold_brew.jpeg",
     "category": "C",
     "name": "나이트로 콜드 브루",
     "price": 4000
   },
   {
-    "src": "/assets/image/coffee/돌체_콜드_브루.jpeg",
+    "src": "/assets/image/coffee/dolce_cold_brew.jpeg",
     "category": "C",
     "name": "돌체 콜드 브루",
     "price": 3900
   },
   {
-    "src": "/assets/image/coffee/자바_칩_프라푸치노.jpeg",
+    "src": "/assets/image/coffee/java_chip_frappuccino.jpeg",
     "category": "C",
     "name": "자바 칩 프라푸치노",
     "price": 5200
   },
   {
-    "src": "/assets/image/coffee/민트_콜드_브루.jpeg",
+    "src": "/assets/image/coffee/mint_cold_brew.jpeg",
     "category": "C",
     "name": "민트 콜드 브루",
     "price": 4800
   },
   {
-    "src": "/assets/image/coffee/바닐라_크림_콜드_브루.jpeg",
+    "src": "/assets/image/coffee/vanilla_cream_cold_brew.jpeg",
     "category": "C",
     "name": "바닐라 크림 콜드 브루",
     "price": 4300
   },
   {
-    "src": "/assets/image/coffee/아이스_토피넛_라떼.jpeg",
+    "src": "/assets/image/coffee/ice_toffinut_latte.jpeg",
     "category": "C",
     "name": "아이스 토피넛 라떼",
     "price": 5500
   },
   {
-    "src": "/assets/image/coffee/제주_비저링_콜드_브루.jpeg",
+    "src": "/assets/image/coffee/jeju_cold_brew.jpeg",
     "category": "C",
     "name": "제주 비저링 콜드 브루",
     "price": 6000
