@@ -1,6 +1,6 @@
 const reduce = (array, callback, initialValue) => {
   let i = -1;
-  let returnValue = initialValue;
+  let returnValue = initialValue || (i++ && array[0]);
   const arrayLength = array.length;
 
   while (++i < arrayLength) {
@@ -8,3 +8,5 @@ const reduce = (array, callback, initialValue) => {
   }
   return returnValue;
 };
+
+exports.reduce = reduce;
