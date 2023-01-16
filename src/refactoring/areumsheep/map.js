@@ -1,11 +1,9 @@
 const map = (array, callback) => {
-  let i = 0;
+  let i = -1;
   const result = [];
-  const arrayLength = array.length;
 
-  while (i < arrayLength) {
+  while (++i < array.length) {
     result.push(callback(array[i], i, array));
-    i++;
   }
   return result;
 };
