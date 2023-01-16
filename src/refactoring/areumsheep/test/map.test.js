@@ -1,6 +1,6 @@
 const { map } = require('../map');
 
-describe('Array.prototype map', () => {
+describe('Array.prototype.map()', () => {
   it('callback으로 넘기는 함수로 계산 후 새로운 배열을 반환한다.', () => {
     const arr = [1, 2, 3, 4, 5];
     expect(map(arr, (x => x * 2))).toStrictEqual(arr.map(x => x * 2));
@@ -9,6 +9,7 @@ describe('Array.prototype map', () => {
   it('계산 후에도 이전 값은 변화가 없다.', () => {
     const beforeArray = [1, 2, 3, 4, 5];
     const targetArray = beforeArray;
+    map(targetArray, (x => x * 2));
     expect(targetArray).toStrictEqual(beforeArray);
 });
 
