@@ -15,9 +15,10 @@ console.log(getAnimalEmoji('dragon'));
 const printMyAnimal = animal => {
   if (animal === 'dog' || animal === 'cat') {
     console.log(`I have a ${animal}`);
+  } else {
+  console.log(printMyAnimal('dog'));
   }
 };
-console.log(printMyAnimal('dog'));
 
 const getAnimalDetails = animal => {
   if (animal?.name && animal.gender && animal.type) {
