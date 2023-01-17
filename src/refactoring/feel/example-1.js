@@ -4,34 +4,19 @@
   --- 여기까지 실습 때의 생각 흐름 ---
   2. 아직 존재하는 중복 코드 정리
   3. 사용 예시 추가
+  4. 정리한 중복 코드도 다 동일한 내용 => 다시 정리
 */
-const setObject = (object, name, key, value) => {
-  const item = { ...object[name], [key]: value };
-  const newObject = { ...object, [name]: item };
 
-  return newObject;
-};
-
-const setPriceByName = (callback, cart, name, price) => {
-  const newCart = callback(cart, name, 'price', price);
-
-  return newCart;
-};
-
-const setShippingByName = (callback, cart, name, ship) => {
-  const newCart = callback(cart, name, 'shipping', ship);
-
-  return newCart;
-};
-
-const setQuantityByName = (callback, cart, name, quant) => {
-  const newCart = callback(cart, name, 'quantity', quant);
-
-  return newCart;
-};
-
-const setTaxByName = (callback, cart, name, tax) => {
-  const newCart = callback(cart, name, 'tax', tax);
+/**
+ * @param {object} cart
+ * @param {string} name
+ * @param {string} key
+ * @param {*} value
+ * @returns {object}
+ */
+const setKeyByName = (cart, name, key, value) => {
+  const item = { ...cart[name], [key]: value };
+  const newCart = { ...cart, [name]: item };
 
   return newCart;
 };
@@ -46,11 +31,12 @@ const cart = {
     desc: '오늘 일식은 초밥',
   },
 };
+const NAME = 'korean';
 
-const cartAddedPrice = setPriceByName(setObject, cart, 'korean', 5000);
-const cartAddedShipping = setShippingByName(setObject, cartAddedPrice, 'korean', '당일 배송');
-const cartAddedQuantity = setQuantityByName(setObject, cartAddedShipping, 'korean', 50);
-const cartAddedTax = setTaxByName(setObject, cartAddedQuantity, 'korean', 1000);
+const cartAddedPrice = setKeyByName(cart, NAME, 'price', 5000);
+const cartAddedShipping = setKeyByName(cartAddedPrice, NAME, 'shipping', '당일 배송');
+const cartAddedQuantity = setKeyByName(cartAddedShipping, NAME, 'quantity', 50);
+const cartAddedTax = setKeyByName(cartAddedQuantity, NAME, 'tax', 1000);
 
 // { korean: { desc: '오늘 한식은 비빔밥' }, japanese: { desc: '오늘 일식은 초밥' } }
 console.log(cart);
