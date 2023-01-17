@@ -1,6 +1,6 @@
 const per2Int = (value, per) => (value * per) / 100;
 
-const Client = ({ name, type, location }) => {
+const Client = (name, type, location) => {
   this.offers = {
     normal: 0,
     premium: 20,
@@ -22,7 +22,7 @@ const Client = ({ name, type, location }) => {
   };
 };
 
-const Product = ({ value, name, shipping }) => {
+const Product = (value, name, shipping) => {
   this.value = value;
   this.name = name;
   this.shipping = shipping;
@@ -38,7 +38,7 @@ const Product = ({ value, name, shipping }) => {
   };
 };
 
-const Order = ({ id, value, client, product }) => {
+const Order = (id, value, client, product) => {
   this.taxes = {
     EU: 21,
     USA: 14,
@@ -63,7 +63,7 @@ const Order = ({ id, value, client, product }) => {
   };
 };
 
-const Summary = ({ order }) => {
+const Summary = (order) => {
   this.order = order;
 
   printSummary = () => {
@@ -84,9 +84,9 @@ const Summary = ({ order }) => {
   };
 };
 
-const MyClient = Client({ name: 'kim', type: 'premium', location: 'EU' });
-const MyProduct = Product({ value: 1000, name: 'red-dish', shipping: 11 });
-const MyOrder = Order({ id: 1, value: 2000, client: MyClient, product: MyProduct });
+const MyClient = Client('kim', 'premium', 'EU');
+const MyProduct = Product(1000, 'red-dish', 11);
+const MyOrder = Order(1, 2000, MyClient, MyProduct);
 
-const MySummary = Summary({order: MyOrder}).printSummary();
+const MySummary = Summary(MyOrder).printSummary();
 console.log(MySummary);
