@@ -5,6 +5,7 @@
   2. 아직 존재하는 중복 코드 정리
   3. 사용 예시 추가
   4. 정리한 중복 코드도 다 동일한 내용 => 다시 정리
+  5. 휴먼 에러 방지
 */
 
 /**
@@ -15,6 +16,11 @@
  * @returns {object}
  */
 const setKeyByName = (cart, name, key, value) => {
+  if (!cart[name]) {
+    console.error(`${name}이 cart에 없습니다`);
+    throw new Error();
+  }
+
   const item = { ...cart[name], [key]: value };
   const newCart = { ...cart, [name]: item };
 
@@ -66,3 +72,6 @@ console.log(cartAddedQuantity);
 //   japanese: { desc: '오늘 일식은 초밥' }
 // }
 console.log(cartAddedTax);
+
+// error
+setKeyByName(cart, 'abc', 'price', 5000);
