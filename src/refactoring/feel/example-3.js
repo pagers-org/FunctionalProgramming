@@ -11,13 +11,21 @@ const user = {
 
 const logToSnapErrors = error => console.log(`🚫 에러가 발생했어요: ${error.message}`);
 
-const getUserData = ({ id }, errorCallback) =>
-  fetch(`https://jsonplaceholder.typicode.com/users?id=${id}`)
-    .then(() => console.log('done'))
-    .catch(errorCallback);
+const getUserData = ({ id }) => {
+  const pr = fetch(`https://jsonplaceholder.typicode.com/users?id=${id}`).then(response => {
+    //
+  });
 
-getUserData(user, logToSnapErrors);
+  return pr;
+};
 
-/*
-getUserData가 아니라 setUserData라면?
-*/
+// 에러 시 단순 로깅이 목적이라면 default가 있으므로 넣지 않는다
+const processAsync = (asyncCallback, errorCallback = logToSnapErrors) => {
+  const pr = asyncCallback().catch(errorCallback);
+  return pr;
+};
+
+// 단순 로깅일 때
+processAsync(getUserData(user));
+// errorCallback을 실행시킬 때
+processAsync(비동기, 비동기에러처리);
