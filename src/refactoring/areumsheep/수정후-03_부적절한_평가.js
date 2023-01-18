@@ -1,85 +1,80 @@
 const per2Int = (value, per) => (value * per) / 100;
 
 const Client = ({ name, type, location }) => {
-  this.offers = {
+  const rate = Object.freeze({
     normal: 0,
     premium: 20,
-  };
+  });
   this.name = name;
   this.type = type;
   this.location = location;
-
+  
   getName = () => this.name;
-  getType = () => this.name;
   getLocation = () => this.location;
-  getPriceByProduct = (product) =>
-    product.getValue() - per2Int(product.getValue(), this.offers[this.type]);
+  getTypeByRate = () => rate[this.type];
 
   return {
     getName,
-    getType,
     getLocation,
-    getPriceByProduct,
+    getTypeByRate,
   };
 };
 
-const Product = ({ value, name, shipping }) => {
+const Product = ({ value, title, shipping }) => {
   this.value = value;
-  this.name = name;
+  this.title = title;
   this.shipping = shipping;
 
   getValue = () => this.value;
-  getProductName = () => this.name;
+  getTitle = () => this.title;
   getShipping = () => this.shipping;
+  getPrice = (rate) => this.value - per2Int(this.value, rate);
 
   return {
     getValue,
-    getProductName,
+    getTitle,
     getShipping,
+    getPrice,
   };
 };
 
 const Order = ({ id, value, client, product }) => {
-  this.taxes = {
+  const taxes = Object.freeze({
     EU: 21,
     USA: 14,
-  };
+  });
   this.id = id;
   this.value = value;
   this.client = client;
   this.product = product;
-
+  
   getId = () => this.id;
   getValue = () => this.value;
-  getClient = () => this.client;
-  getProduct = () => this.product;
-  getTaxes = (loc) => this.taxes[loc];
+  getClientName = () => this.client.getName();
+  getProductName = () => this.product.getTitle();
+  getShipping = () => this.product.getShipping();
+  getTotalPriceByLocation = () =>
+    this.product.getPrice(this.client.getTypeByRate()) +
+    taxes[this.client.getLocation()];
 
   return {
     getId,
     getValue,
-    getClient,
-    getProduct,
-    getTaxes,
+    getClientName,
+    getProductName,
+    getShipping,
+    getTotalPriceByLocation,
   };
 };
 
-const Summary = ({ order }) => {
-  this.order = order;
-
-  printSummary = () => {
-    let client = order.getClient();
-    let product = order.getProduct();
-
+const Print = () => {
+  printSummary = ({ order }) => {
     return `Order: ${order.getId()}
-                Client: ${client.getName()}
-                Product: ${product.getProductName()}
-                TotalAmount: ${
-                  client.getPriceByProduct(product) +
-                  order.getTaxes(client.getLocation())
-                }
-                
-                Arrival in: ${product.getShipping()} days.`;
+            Client: ${order.getClientName()}
+            Product: ${order.getProductName()}
+            TotalAmount: ${order.getTotalPriceByLocation()}
+            
+            Arrival in: ${order.getShipping()}`;
   };
 
   return {
@@ -87,15 +82,16 @@ const Summary = ({ order }) => {
   };
 };
 
-const client = Client({ name: 'areumsheep', type: 'normal', location: 'EU' });
-const product = Product({ value: 10000, name: 'product', shipping: 123 });
+
+const product = Product({ value: 10000, title: 'product', shipping: 123 });
+const client = Client({ name: 'areumsheep7', type: 'normal', location: 'EU' });
 const order = Order({
-  id: 'id',
+  id: '000123',
   value: 3000,
   client,
   product,
 });
 
-const summary = Summary({order});
+const print = Print();
 
-console.log(summary.printSummary());
+console.log(print.printSummary({ order }));
