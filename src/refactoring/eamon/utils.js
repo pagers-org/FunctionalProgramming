@@ -4,20 +4,20 @@
 
 const _forEach = callback => array => {
   for (let i = 0; i < array.length; i++) {
-    callback(array[i]);
+    callback(array[i], i, [...array]);
   }
 };
 
 const _map = callback => array => {
   const result = [];
-  _forEach(item => result.push(callback(item)))(array);
+  _forEach((item, idx, copy) => result.push(callback(item, idx, copy)))(array);
   return result;
 };
 
 const _filter = callback => array => {
   const result = [];
-  _forEach(item => {
-    if (callback(item)) {
+  _forEach((item, idx, copy) => {
+    if (callback(item, idx, copy)) {
       result.push(item);
     }
   })(array);
@@ -25,9 +25,10 @@ const _filter = callback => array => {
 };
 
 const _reduce = (callback, initialValue) => array => {
-  let acc = initialValue;
-  _forEach(item => {
-    acc = callback(acc, item);
+  let acc = initialValue ?? array[0];
+  _forEach((item, idx, copy) => {
+    if (idx === 0 && initialValue === undefined) return;
+    acc = callback(acc, item, idx, copy);
   })(array);
   return acc;
 };
@@ -39,7 +40,8 @@ const _pipe =
   };
 
 _pipe(
-  _filter(i => i % 2 === 0),
-  _map(i => ++i),
-  _forEach(console.log),
+  _reduce((acc, i) => acc + i),
+  console.log,
 )([1, 2, 3, 4]);
+
+module.exports = { _forEach, _map, _filter, _reduce, _pipe };
