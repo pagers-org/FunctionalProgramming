@@ -3,7 +3,7 @@
  * @param {(value:T, index: number, arr: T[])} callback 배열의 각 원소를 가지고 실행할 콜백 함수
  */
 export const forEach = (arr, callback) => {
-  if (!('length' in arr)) throw '배열이 아님!';
+  if (!Object.prototype.hasOwnProperty.call(arr, 'length')) throw '배열이 아님!';
   let index = 0;
   while (index < arr.length) {
     const current = arr[index];
