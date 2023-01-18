@@ -27,14 +27,17 @@ class Phone {
     this.unformattedNumber = unformattedNumber;
   }
 
-  get countryCode() {
-    return this.unformattedNumber.substring(0, 3);
+  getCountryCode() {
+    return `${this.unformattedNumber.substring(0, 3)}`;
   }
-  get areaCode() {
+  getAreaCode() {
     return `${this.unformattedNumber.substring(3, 6)}`;
   }
-  get baseNumber() {
+  getBaseNumber() {
     return `${this.unformattedNumber.substring(6, 9)} ${this.unformattedNumber.substring(9, 12)}`;
+  }
+  getFormatPhone() {
+    return `${this.getCountryCode()} ${this.getAreaCode()} ${this.getBaseNumber()}`;
   }
 }
 
@@ -44,27 +47,27 @@ class User {
     this.lastName = lastName;
     this.dni = dni;
     this.email = email;
-    this.phone = `${phone.countryCode} ${phone.areaCode} ${phone.baseNumber}`;
+    this.phone = phone;
   }
 
-  get userName() {
+  getName() {
     return this.name;
   }
-  get userLastName() {
+  getLastName() {
     return this.lastName;
   }
-  get userDni() {
+  getDni() {
     return this.dni;
   }
-  get userEmail() {
+  getEmail() {
     return this.email;
   }
-  get userPhone() {
-    return this.phone;
+  getPhone() {
+    return this.phone.getFormatPhone();
   }
 }
 
 const phone1 = new Phone('+34635538973');
 const user1 = new User('Fernando', 'Aparicio Galende', '12345678S', phone1, 'fernando.aparicio@guidesmiths.com');
 
-beforePrinter(user1, phone1);
+afterPrinter(user1, phone1);

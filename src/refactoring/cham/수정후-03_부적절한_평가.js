@@ -1,18 +1,13 @@
 const per2Int = (value, per) => (value * per) / 100;
 
 const Client = ({ name, type, location }) => {
-  this.offers = {
-    normal: 0,
-    premium: 20,
-  };
   this.name = name;
   this.type = type;
   this.location = location;
 
   getName = () => this.name;
-  getType = () => this.name;
+  getType = () => this.type;
   getLocation = () => this.location;
-  getPriceByProduct = product => product.value - per2Int(product.value, this.offers[this.type]);
 
   return {
     getName,
@@ -23,6 +18,10 @@ const Client = ({ name, type, location }) => {
 };
 
 const Product = ({ value, name, shipping }) => {
+  this.offers = {
+    normal: 0,
+    premium: 20,
+  };
   this.value = value;
   this.name = name;
   this.shipping = shipping;
@@ -30,11 +29,13 @@ const Product = ({ value, name, shipping }) => {
   getValue = () => this.value;
   getProductName = () => this.name;
   getShipping = () => this.shipping;
+  getPriceByProduct = clientType => this.value - per2Int(this.value, this.offers[clientType]);
 
   return {
     getValue,
     getProductName,
     getShipping,
+    getPriceByProduct,
   };
 };
 
@@ -52,13 +53,14 @@ const Order = ({ id, value, client, product }) => {
   getValue = () => this.value;
   getClient = () => this.client;
   getProduct = () => this.product;
-  getTaxes = loc => this.getTaxes(this.taxes[loc]);
+  getTaxes = loc => this.taxes[loc];
 
   return {
     getId,
     getValue,
     getClient,
     getProduct,
+    getTaxes,
   };
 };
 
@@ -66,16 +68,16 @@ const Summary = ({ order }) => {
   this.order = order;
 
   printSummary = () => {
-    let client = order.getClient();
-    let product = order.product();
+    let client = this.order.getClient();
+    let product = this.order.getProduct();
 
-    return `Order: ${order.getId()}
+    return `Order: ${this.order.getId()}
                 Client: ${client.getName()}
                 Product: ${product.getProductName()}
-                TotalAmount: ${client.getPriceByProduct(product) + this.order.getTaxes(client.getLocation())}
+                TotalAmount: ${product.getPriceByProduct(client.getType()) + this.order.getTaxes(client.getLocation())}
                 
                 
-                Arrival in: ${this.order.product.getShipping()} days.`;
+                Arrival in: ${product.getShipping()} days.`;
   };
 
   return {

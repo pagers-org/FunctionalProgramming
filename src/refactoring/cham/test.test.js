@@ -18,12 +18,12 @@ const consoleTestUtils = (script, inputDir = './', outputDir = './') => {
 describe('tests', () => {
   const beforeData = {
     inputDir: 'src/refactoring',
-    scripts: '수정전-01_조건부_복잡성.js',
+    scripts: '수정전-03_부적절한_평가.js',
     outputDir: 'src/refactoring/cham/outputTxt',
   };
   const afterData = {
     inputDir: 'src/refactoring/cham',
-    scripts: '수정후-01_조건부_복잡성.js',
+    scripts: '수정후-03_부적절한_평가.js',
     outputDir: 'src/refactoring/cham/outputTxt',
   };
 
@@ -35,7 +35,7 @@ describe('tests', () => {
     execSync(after1.execSyncArgsForCreateTxtFormConsoleLog());
   });
 
-  test('01_조건부_복잡성', () => {
+  test('03_부적절한_평가', () => {
     const beforeTxt = fs.readFileSync(...before1.readOutputTxtArgs);
     const afterTxt = fs.readFileSync(...after1.readOutputTxtArgs);
     expect(beforeTxt).toEqual(afterTxt);
