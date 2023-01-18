@@ -5,13 +5,10 @@ const Client = ({ name, type, location }) => {
     normal: 0,
     premium: 20,
   };
-  this.name = name;
-  this.type = type;
-  this.location = location;
 
-  getName = () => this.name;
-  getType = () => this.name;
-  getLocation = () => this.location;
+  getName = () => name;
+  getType = () => type;
+  getLocation = () => location;
   getPriceByProduct = product => product.getValue() - per2Int(product.getValue(), this.offers[this.type]);
 
   return {
@@ -23,13 +20,9 @@ const Client = ({ name, type, location }) => {
 };
 
 const Product = ({ value, name, shipping }) => {
-  this.value = value;
-  this.name = name;
-  this.shipping = shipping;
-
-  getValue = () => this.value;
-  getProductName = () => this.name;
-  getShipping = () => this.shipping;
+  getValue = () => value;
+  getProductName = () => name;
+  getShipping = () => shipping;
 
   return {
     getValue,
@@ -43,15 +36,11 @@ const Order = ({ id, value, client, product }) => {
     EU: 21,
     USA: 14,
   };
-  this.id = id;
-  this.value = value;
-  this.client = client;
-  this.product = product;
 
-  getId = () => this.id;
-  getValue = () => this.value;
-  getClient = () => this.client;
-  getProduct = () => this.product;
+  getId = () => id;
+  getValue = () => value;
+  getClient = () => client;
+  getProduct = () => product;
   getTaxes = loc => this.taxes[loc];
 
   return {
@@ -69,6 +58,11 @@ const Summary = ({ order }) => {
   printSummary = () => {
     let client = order.getClient();
     let product = order.getProduct();
+
+    console.log(client.name, product.name, client.getName());
+    client.name = 'Test';
+    product.name = 'Test';
+
     return `Order: ${order.getId()}
                 Client: ${client.getName()}
                 Product: ${product.getProductName()}
@@ -101,7 +95,7 @@ const order = Order({
   client,
   product,
 });
-
+console.log(order.getClient().getName());
 const summary = Summary({
   order,
 });
