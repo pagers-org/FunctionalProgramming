@@ -25,4 +25,10 @@ describe('Array.prototype.reduce()', () => {
   it('초기 값을 지정하지 않아도 정상 계산되어야 한다.', () => {
     expect(reduce([2, 2, 2], (a, b) => a * b)).toEqual([2, 2, 2].reduce((a, b) => a * b));
   });
+
+  it('빈 배열을 초기 값 없이 사용할 경우 TypeError가 발생한다.', () => {
+    expect(() => {
+      reduce([], (value) => value)
+    }).toThrow(TypeError);
+  });
 });
