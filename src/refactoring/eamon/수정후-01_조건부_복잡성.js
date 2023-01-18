@@ -94,21 +94,38 @@ const car = {
   },
 };
 
-const model = (car && car.model) || 'default model';
+function getFieldValueInNestedObject(object, field) {
+  if (!object) return `default ${field}`;
+  const keys = Object.keys(object);
 
-const street =
-  (car && car.manufacturer && car.manufacturer.address && car.manufacturer.address.street) || 'default street';
+  if (keys.includes(field)) {
+    return object[field];
+  }
 
-const phoneNumber = car && car.manufacturer && car.manufacturer.address && car.manufacturer.phoneNumber;
+  for (const key of keys) {
+    if (object[key] !== null && typeof object[key] === 'object') {
+      const result = getFieldValueInNestedObject(object[key], field);
+      if (result) return result;
+    }
+  }
+
+  return `default ${field}`;
+}
+
+const model = getFieldValueInNestedObject(car, 'model');
+
+const street = getFieldValueInNestedObject(car, 'street');
+
+const phoneNumber = getFieldValueInNestedObject(car, 'phoneNumber');
 
 console.log(model);
 console.log(street);
 console.log(phoneNumber);
 
 const isManufacturerFromUSA = car => {
-  if (car && car.manufacturer && car.manufacturer.address && car.manufacturer.address.state === 'USA') {
+  if (getFieldValueInNestedObject(car, 'state') === 'USA') {
     console.log('true');
   }
 };
 
-console.log(isManufacturerFromUSA());
+console.log(isManufacturerFromUSA(car));
