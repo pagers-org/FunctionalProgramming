@@ -32,6 +32,7 @@ const printMyAnimal = animal => {
   if (animal !== 'dog' || animal !== 'cat') {
     return;
   }
+
   console.log(`I have a ${animal}`);
 };
 console.log(printMyAnimal('dog'));
@@ -39,23 +40,13 @@ console.log(printMyAnimal('dog'));
 const getAnimalDetails = animal => {
   let result;
 
-  if (animal) {
-    if (animal.type) {
-      if (animal.name) {
-        if (animal.gender) {
-          result = `${animal.name} is a ${animal.gender} ${animal.type}`;
-        } else {
-          result = 'No animal gender';
-        }
-      } else {
-        result = 'No animal name';
-      }
-    } else {
-      result = 'No animal type';
-    }
-  } else {
-    result = 'No animal';
-  }
+  if (!animal) return 'No animal';
+
+  if (!animal.type) return 'No animal type';
+  if (!animal.name) return 'No animal name';
+  if (!animal.gender) return 'No animal gender';
+
+  result = `${animal.name} is a ${animal.gender} ${animal.type}`;
 
   return result;
 };
@@ -65,26 +56,27 @@ console.log(getAnimalDetails({ type: 'dog', name: 'Lucy' }));
 console.log(getAnimalDetails({ type: 'dog', name: 'Lucy', gender: 'female' }));
 
 const printFruits = color => {
-  switch (color) {
-    case 'red':
-      return ['apple', 'strawberry'];
-    case 'yellow':
-      return ['banana', 'pineapple'];
-    case 'purple':
-      return ['grape', 'plum'];
-    default:
-      return [];
-  }
+  const FRUITS = {
+    red: ['apple', 'strawberry'],
+    yellow: ['banana', 'pineapple'],
+    purple: ['grape', 'plum'],
+  };
+
+  if (!color || FRUITS[color]) return [];
+
+  return FRUITS[color];
 };
+
 console.log(printFruits(null));
 console.log(printFruits('yellow'));
 
 const printVegetableName = vegetable => {
-  if (vegetable && vegetable.name) {
-    console.log(vegetable.name);
-  } else {
+  if (!vegetable || !vegetable.name) {
     console.log('unknown');
+    return;
   }
+
+  console.log(vegetable.name);
 };
 printVegetableName(undefined);
 printVegetableName({});
@@ -108,13 +100,15 @@ const street =
   (car && car.manufacturer && car.manufacturer.address && car.manufacturer.address.street) || 'default street';
 
 const phoneNumber = car && car.manufacturer && car.manufacturer.address && car.manufacturer.phoneNumber;
+
 console.log(model);
 console.log(street);
 console.log(phoneNumber);
 
-const isManufacturerFromUSA = () => {
+const isManufacturerFromUSA = car => {
   if (car && car.manufacturer && car.manufacturer.address && car.manufacturer.address.state === 'USA') {
     console.log('true');
   }
 };
+
 console.log(isManufacturerFromUSA());
