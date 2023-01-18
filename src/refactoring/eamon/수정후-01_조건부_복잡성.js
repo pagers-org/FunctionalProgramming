@@ -1,21 +1,30 @@
 const getAnimalEmoji = animal => {
   if (animal === 'dog') {
     return '🐶';
-  } else if (animal === 'cat') {
+  }
+  if (animal === 'cat') {
     return '🐱';
-  } else if (animal === 'frog') {
+  }
+  if (animal === 'frog') {
     return '🐸';
-  } else if (animal === 'panda') {
+  }
+  if (animal === 'panda') {
     return '🐼';
-  } else if (animal === 'giraffe') {
+  }
+  if (animal === 'giraffe') {
     return '🦒';
-  } else if (animal === 'monkey') {
+  }
+  if (animal === 'monkey') {
     return '🐵';
-  } else if (animal === 'unicorn') {
+  }
+  if (animal === 'unicorn') {
     return '🦄';
-  } else if (animal === 'dragon') {
+  }
+  if (animal === 'dragon') {
     return '🐲';
   }
+
+  return 'unknown';
 };
 console.log(getAnimalEmoji('dragon'));
 
