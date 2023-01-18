@@ -7,8 +7,8 @@ function beforePrinter(user, phone) {
   console.log(`User name: ${user.userName}`);
   console.log(`User lastname: ${user.userLastName}`);
   console.log(`User DNI: ${user.userDni}`);
-  console.log(`User phone: ${user.userEmail}`);
-  console.log(`User email: ${user.userPhone}`);
+  console.log(`User phone: ${user.userPhone}`);
+  console.log(`User email: ${user.userEmail}`);
 }
 
 function afterPrinter(user, phone) {
@@ -19,12 +19,25 @@ function afterPrinter(user, phone) {
   console.log(`User name: ${user.getName()}`);
   console.log(`User lastname: ${user.getLastName()}`);
   console.log(`User DNI: ${user.getDni()}`);
-  console.log(`User email: ${user.getPhone()}`);
+  console.log(`User email: ${user.getEmail()}`);
 }
 
 class Phone {
   constructor(unformattedNumber) {
     this.unformattedNumber = unformattedNumber;
+  }
+
+  getCountryCode() {
+    return this.unformattedNumber.substring(0, 3);
+  }
+  getAreaCode() {
+    return `${this.unformattedNumber.substring(3, 6)}`;
+  }
+  getBaseNumber() {
+    return `${this.unformattedNumber.substring(6, 9)} ${this.unformattedNumber.substring(9, 12)}`;
+  }
+  getFormatPhone() {
+    return `${this.getCountryCode()} ${this.getAreaCode()} ${this.getBaseNumber()}`;
   }
 
   get countryCode() {
@@ -45,6 +58,22 @@ class User {
     this.dni = dni;
     this.email = email;
     this.phone = `${phone.countryCode} ${phone.areaCode} ${phone.baseNumber}`;
+  }
+
+  getName() {
+    return this.name;
+  }
+  getLastName() {
+    return this.lastName;
+  }
+  getDni() {
+    return this.dni;
+  }
+  getEmail() {
+    return this.email;
+  }
+  getPhone() {
+    return this.phone;
   }
 
   get userName() {
@@ -68,3 +97,4 @@ const phone1 = new Phone('+34635538973');
 const user1 = new User('Fernando', 'Aparicio Galende', '12345678S', phone1, 'fernando.aparicio@guidesmiths.com');
 
 beforePrinter(user1, phone1);
+afterPrinter(user1, phone1);
