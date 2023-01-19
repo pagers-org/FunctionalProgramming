@@ -1,1 +1,3 @@
-import "./roy/app";
+import { play } from "./jeong/app";
+
+play();
