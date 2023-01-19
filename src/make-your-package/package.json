@@ -1,0 +1,16 @@
+{
+  "name": "parang-utils",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "author": "FECrash",
+  "license": "ISC",
+  "homepage": "https://github.com/FECrash/FunctionalProgramming#readme",
+  "bugs": "https://github.com/FECrash/FunctionalProgramming#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FECrash/FunctionalProgramming.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
