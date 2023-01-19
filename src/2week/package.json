@@ -1,7 +1,9 @@
 {
-  "name": "2week_",
+  "name": "fecrash-cafe",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
