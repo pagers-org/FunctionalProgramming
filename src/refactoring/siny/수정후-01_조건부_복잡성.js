@@ -57,11 +57,7 @@ console.log(printFruits(null));
 console.log(printFruits('yellow'));
 
 const printVegetableName = vegetable => {
-  if (vegetable && vegetable.name) {
-    console.log(vegetable.name);
-  } else {
-    console.log('unknown');
-  }
+  console.log(vegetable?.name ?? 'unknown');
 };
 printVegetableName(undefined);
 printVegetableName({});
@@ -79,19 +75,15 @@ const car = {
   },
 };
 
-const model = (car && car.model) || 'default model';
+const model = car?.model ?? 'default model';
 
-const street =
-  (car && car.manufacturer && car.manufacturer.address && car.manufacturer.address.street) || 'default street';
+const street = car?.manufacturer?.address?.street ?? 'default street';
 
-const phoneNumber = car && car.manufacturer && car.manufacturer.address && car.manufacturer.phoneNumber;
+const phoneNumber = car?.manufacturer?.address && car?.manufacturer?.phoneNumber;
 console.log(model);
 console.log(street);
 console.log(phoneNumber);
 
-const isManufacturerFromUSA = () => {
-  if (car && car.manufacturer && car.manufacturer.address && car.manufacturer.address.state === 'USA') {
-    console.log('true');
-  }
-};
+const isManufacturerFromUSA = () => car?.manufacturer?.address?.state === 'USA' && console.log(true);
+
 console.log(isManufacturerFromUSA());
