@@ -1,4 +1,8 @@
 const forEach = (array, callBack) => {
+  if (array.length === 0) {
+    throw new Error("Array가 없어요!!!");
+  }
+
   for (let i = 0; i < array.length; i++) {
     callBack(array[i], i, ...array);
   }
