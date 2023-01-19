@@ -21,11 +21,11 @@ const logger =
     console.log(callback(...arg))
 
 const getAnimalDetails = animal => {
-  const notExistKey = key => `No animal${key ? ` ${key}` : ''}`
-  if (!animal) return notExistKey()
-  if (!animal.type) return notExistKey('type')
-  if (!animal.name) return notExistKey('name')
-  if (!animal.gender) return notExistKey('gender')
+  if (!animal) return 'No animal'
+  const noExistKey = key => `No animal ${key}`
+  for(const key of ['type', 'name', 'gender']) {
+    if (!animal?.[key]) return noExistKey(key)
+  }
   return `${animal.name} is a ${animal.gender} ${animal.type}`
 }
 const printAnimalDetails = logger(getAnimalDetails)
@@ -91,6 +91,6 @@ const printCarDetails = car => {
   console.log(manufacturer_address_street)
   console.log(manufacturer_address_number)
 
-  if (manufacturer_address_street === 'USA') console.log('true')
+  if (manufacturer_address_state === 'USA') console.log('true')
 }
 printCarDetails(car)
