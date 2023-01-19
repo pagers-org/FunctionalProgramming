@@ -18,29 +18,41 @@ function setTaxByName(cart, name, tax) {
  * cart 에 새로운 아이템을 포함하게 하는 cart 도메인에 속하는 메서드
  * */
 function appendNewItemToCart(cart, name, itemKey, itemValue) {
-  var item = cart[name];
-  var newItem = objectSet(item, itemKey, itemValue);
-  var newCart = objectSet(cart, name, newItem);
+  const item = cart[name];
+  const newItem = objectSet(item, itemKey, itemValue);
+  const newCart = objectSet(cart, name, newItem);
   return newCart;
 }
-const safe = (fn, checkIsSafeFn, resFn) => {
+
+/**
+ * fn 받고 해당 fn을 실행할 때 받는 args 를 이용해서 실행할지 말지 결정하는 로직
+ * */
+const safe = (fn, shouldInvoke, returnBy) => {
   return (...args) => {
-    if (checkIsSafeFn(args)) {
-      return fn(args);
+    if (shouldInvoke(...args)) {
+      return fn(...args);
     }
-    return resFn(args);
+    return returnBy(...args);
   };
 };
 const safeAppendNewItemToCart = safe(
   appendNewItemToCart,
-  (cart, name, itemKey) => {
-    return cart[name] && Object.keys(cart[name]).includes(itemKey);
+  (carts, name, itemKey) => {
+    return carts[name] && Object.keys(carts[name]).includes(itemKey);
   },
-  cart => ({ ...cart }),
+  carts => ({ ...carts }),
 );
 
 function objectSet(object, key, value) {
-  var copy = Object.assign({}, object);
+  const copy = Object.assign({}, object);
   copy[key] = value;
   return copy;
 }
+
+module.exports = {
+  setPriceByName,
+  setQuantityByName,
+  setTaxByName,
+  setShippingByName,
+  safeAppendNewItemToCart,
+};
