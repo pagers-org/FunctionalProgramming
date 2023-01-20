@@ -1,5 +1,5 @@
-const solution1 = require('./ps/solution1.js');
-const solution2 = require('./ps/solution2.js');
+const solution1 = require('./solution1.js');
+const solution2 = require('./solution2.js');
 
 describe('test1', () => {
   it('[5,1,3,7,8,4,2] => [5,1,15,8,120,12,240] =>{t:[8, 12, 120, 240],h:[12, 15, 120, 240]}', () => {
