@@ -3,6 +3,10 @@
 // function 함수를 Arrow 함수로 변경한 이유는 this 값을 조작할 필요가 없기 때문에 변경 했습니다.
 
 const setFieldByName = (cart, name, field, value) => {
+  if (!!cart?.name) {
+    return `You have don't name in cart`;
+  }
+
   const item = cart[name];
   const newItem = objectSet(item, field, value);
 
