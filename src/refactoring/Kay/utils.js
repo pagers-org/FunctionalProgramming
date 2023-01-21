@@ -1,6 +1,6 @@
-const forEach = (array, callBack) => {
+export const _forEach = (array, callBack) => {
   if (array.length === 0) {
-    throw new Error("Array가 없어요!!!");
+    throw new Error("You don't have a array");
   }
 
   for (let i = 0; i < array.length; i++) {
@@ -8,16 +8,20 @@ const forEach = (array, callBack) => {
   }
 };
 
-const map = (array, callBack) => {
+export const _map = (array, callBack) => {
+  if (array.length === 0) {
+    return [];
+  }
+
   const result = [];
-  forEach(array, (item, idx, copy) => result.push(callBack(item, idx, copy)));
+  _forEach(array, (item, idx, copy) => result.push(callBack(item, idx, copy)));
 
   return result;
 };
 
-const filter = (array, callBack) => {
+export const _filter = (array, callBack) => {
   const result = [];
-  forEach(array, (item, idx, copy) => {
+  _forEach(array, (item, idx, copy) => {
     if (callBack(item, idx, copy)) {
       result.push(item);
     }
@@ -26,7 +30,11 @@ const filter = (array, callBack) => {
   return result;
 };
 
-const reduce = (array, callBack, initValue) => {
+export const _reduce = (array, callBack, initValue) => {
+  if (array.length === 0) {
+    return initValue;
+  }
+
   const hasInitValue = !!initValue;
   let accResult = hasInitValue ? initValue : array[0];
   let idx = hasInitValue ? 0 : 1;

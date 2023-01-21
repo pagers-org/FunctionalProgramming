@@ -4,7 +4,7 @@
 
 const setFieldByName = (cart, name, field, value) => {
   if (!!cart?.name) {
-    return `You have don't name in cart`;
+    return `You don't have a name in cart`;
   }
 
   const item = cart[name];
