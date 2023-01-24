@@ -1,4 +1,4 @@
-const { _forEach, _map, _filter, _reduce } = require("../Kay/utils");
+const { _forEach, _map, _filter, _reduce, _pipe } = require("../Kay/utils");
 
 describe("forEach", () => {
   const mockCallBack = jest.fn();
@@ -80,5 +80,15 @@ describe("reduce", () => {
     const result = _reduce([1, 2, 3], mockCallBack, 0);
     expect(result).toBe(6);
     expect(mockCallBack).toHaveBeenCalledTimes(3);
+  });
+});
+
+describe("pipe", () => {
+  it("with functions", () => {
+    const add1 = (x) => x + 1;
+    const multiplyBy2 = (x) => x * 2;
+    const actions = _pipe(add1, multiplyBy2);
+
+    expect(actions(2)).toBe(6);
   });
 });

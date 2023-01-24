@@ -59,9 +59,15 @@ const _reduce = (array, callBack, initValue) => {
   return result;
 };
 
+const _pipe =
+  (...fns) =>
+  (value) =>
+    fns.reduce((acc, fn) => fn(acc), value);
+
 module.exports = {
   _forEach,
   _map,
   _filter,
   _reduce,
+  _pipe,
 };
