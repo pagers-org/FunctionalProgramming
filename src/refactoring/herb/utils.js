@@ -1,15 +1,13 @@
 const Map = (array, f) => {
-    const copyArray = [...array];
-    for(let i = 0; i < copyArray.length; i++) {
-        f(i, copyArray[i]);
+    for(let i = 0; i < array.length; i++) {
+        f(i, array[i]);
     }
 };
 
 const Filter = (array, f) => {
     const tmp = [];
-    const copyArray = [...array];
 
-    Map(copyArray, ((idx,value) => {
+    Map(array, ((idx,value) => {
         if(f(idx, value)) {
             tmp.push(f(idx,value));
         }
@@ -22,7 +20,7 @@ const Reduce = (array, f,initValue) => {
     const copyArray = array;
     let init = initValue ?? 0;
     
-    Map(copyArray, (acc, cur) => {
+    Map(copyArray, (_, cur) => {
         init = f(init, cur);
     } )
     
@@ -45,6 +43,8 @@ const filteredArray = Filter(array, ((idx, value) => {
 console.log(filteredArray);
 
 console.log('---------------Reduce----------------');
-const reduce = Reduce([1.1,1.2,1.3], ((acc, cur) => {
+const reduce = Reduce([1,2,3,4,5], ((acc, cur,) => {
     return acc + cur
-    }), 0);
+}), 10);
+
+console.log(reduce)
