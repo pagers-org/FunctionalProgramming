@@ -118,8 +118,8 @@ console.log(carPropertyChecker(car, 'number'));
 console.log('----------------------------isManufacturerFromUSA-------------------------')
 
 const isManufacturerFromUSA = () => {
-  if (car && car.manufacturer && car.manufacturer.address && car.manufacturer.address.state === 'USA') {
-    console.log('true');
+  if (car?.manufacturer?.address?.state === "USA") {
+    console.log("true");
   }
 };
 console.log(isManufacturerFromUSA());
