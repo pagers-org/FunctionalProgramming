@@ -14,15 +14,15 @@ class Client {
         this.#location = location;
     }
 
-    get getName() { 
+    get name() { 
         return this.#name;
     }
 
-    get getType() { 
+    get type() { 
         return this.#type;
     }
 
-    get getLocation() {
+    get location() {
         return this.#location;
     }
 
@@ -42,15 +42,15 @@ class Product {
         this.#shipping = shipping;
     }
 
-    get getValue() {
+    get value() {
         return this.#value;
     }
 
-    get getName() {
+    get name() {
         return this.#name;
     }
 
-    get getShipping() {
+    get shipping() {
         return this.#shipping;
     }
 }
@@ -72,19 +72,19 @@ class Order {
         this.#product = product;
     }
 
-    get getId() {
+    get id() {
         return this.#id;
     }
 
-    get getValue() {
+    get value() {
         return this.#value;
     }
 
-    get getClient() {
+    get client() {
         return this.#client;
     }
 
-    get getProduct() {
+    get product() {
         return this.#product;
     }
 
@@ -99,26 +99,26 @@ const order = new Order(1, 24000, client, product);
 
 const printClientInfo = (client, product) => {
     console.log('---------------Client Info---------------');
-    console.log('client name : ',client.getName);
-    console.log('client type :', client.getType);
-    console.log('client location :', client.getLocation);
-    console.log('client priceByProduct :', client.getPriceByProduct(product.getValue));
+    console.log('client name : ',client.name);
+    console.log('client type :', client.type);
+    console.log('client location :', client.location);
+    console.log('client priceByProduct :', client.getPriceByProduct(product.value));
 }
 
 const printProductInfo = (product) => {
     console.log('---------------Product Info-----------------');
-    console.log('product value : ', product.getValue);
-    console.log('product Name : ', product.getName);
-    console.log('product shipping : ', product.getShipping);
+    console.log('product value : ', product.value);
+    console.log('product Name : ', product.name);
+    console.log('product shipping : ', product.shipping);
 }
 
 const printOrderInfo = (order) => {
     console.log('----------------Order Info----------------');
-    console.log('order id : ', order.getId);
-    console.log('order value :', order.getValue);
-    console.log('order client :', order.getClient.getName);
-    console.log('order product :', order.getProduct.getName);
-    console.log('total Amount :', order.getClient.getPriceByProduct(order.getProduct.getValue) + order.getTaxes(order.getClient.getLocation));
+    console.log('order id : ', order.id);
+    console.log('order value :', order.value);
+    console.log('order client :', order.client.name);
+    console.log('order product :', order.product.name);
+    console.log('total Amount :', order.client.getPriceByProduct(order.product.value) + order.getTaxes(order.client.location));
 }
 
 printClientInfo(client, product)
