@@ -1,5 +1,5 @@
 {
-  "name": "parang-utils",
+  "name": "eden-ju-utils",
   "version": "0.0.1",
   "main": "./index.js",
   "author": "FECrash",
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FECrash/FunctionalProgramming.git"
+  },
+  "scripts": {
+    "deploy": "npm publish --access=public"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
