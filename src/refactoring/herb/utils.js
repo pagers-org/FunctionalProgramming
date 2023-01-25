@@ -6,10 +6,9 @@ const Map = (array, f) => {
 
 const Filter = (array, f) => {
     const tmp = [];
-
     Map(array, ((idx,value) => {
         if(f(idx, value)) {
-            tmp.push(f(idx,value));
+            tmp.push(array[idx]);
         }
     }));
 
@@ -19,7 +18,6 @@ const Filter = (array, f) => {
 const Reduce = (array, f,initValue) => {
     const copyArray = array;
     let init = initValue ?? 0;
-    
     Map(copyArray, (_, cur) => {
         init = f(init, cur);
     } )
