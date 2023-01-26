@@ -6,7 +6,11 @@ const useState = <T>(initialState: T): [() => T, (arg: ((prev: T) => T)) => T] =
   return [
     () => _state,
     arg => {
-      _state = arg(_state)
+      if (typeof arg === 'function') {
+        _state = arg(_state)
+      } else {
+        _state = arg
+      }
       return _state
     }
   ]
@@ -26,14 +30,14 @@ const updateDOM = () => {
   document.querySelector('.total-tax')!.textContent = getTotalTax(cartTotal).toLocaleString('ko-KR') + '원'
   products.forEach(product => {
     if (product.elem) {
-      product.elem.classList.toggle('free', isFreeShipping(product, cartTotal));
+      product.elem.classList.toggle('free', isFreeShipping(product, cartTotal))
     }
   })
 }
 const handleClick = (e: Event) => {
-  const tg = e.target as HTMLElement;
+  const tg = e.target as HTMLElement
   if (tg.localName !== 'button') return
-  const $item = tg.closest('.item') as HTMLElement;
+  const $item = tg.closest('.item') as HTMLElement
   const product = products.find(p => p.elem === $item)
   if (product) {
     addItemToCart({ name: product.name, category: product.category, price: product.price })
