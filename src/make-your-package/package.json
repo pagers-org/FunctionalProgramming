@@ -1,9 +1,21 @@
 {
-  "name": "parang-utils",
-  "version": "0.0.1",
-  "main": "./index.js",
+  "name": "miso-utils",
+  "version": "0.0.13",
+  "main": "./dist/index.js",
+  "module": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./src/index.js"
+    }
+  },
   "author": "FECrash",
   "license": "ISC",
+  "scripts": {
+    "deploy": "npm publish --access=public",
+    "build": "babel src -d dist"
+  },
   "homepage": "https://github.com/FECrash/FunctionalProgramming#readme",
   "bugs": "https://github.com/FECrash/FunctionalProgramming#readme",
   "repository": {
@@ -11,6 +23,11 @@
     "url": "git+https://github.com/FECrash/FunctionalProgramming.git"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "typescript": "^4.9.4"
   }
 }
