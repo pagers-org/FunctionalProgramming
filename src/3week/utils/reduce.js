@@ -12,7 +12,7 @@ const reduce = (array, callback, initialValue) => {
   }
 
   while (++i < arrayLength) {
-    returnValue = callback(returnValue, array[i], i, array);
+    returnValue = callback(returnValue, array[i], i, ...array);
   }
   return returnValue;
 };

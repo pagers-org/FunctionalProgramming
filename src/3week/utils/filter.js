@@ -3,7 +3,7 @@ const filter = (array, callback) => {
   const result = [];
 
   while (++i < array.length) {
-    const condition = callback(array[i], i, array);
+    const condition = callback(array[i], i, ...array);
     if (condition) result.push(array[i]);
   }
   return result;
