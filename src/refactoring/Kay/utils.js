@@ -67,6 +67,16 @@ const _take = (array, count) => {
   return array.slice(0, count);
 };
 
+const _groupBy = (array, callback) => {
+  const obj = {};
+  console.log(array);
+
+  const data = _map(array, callback);
+  console.log(data);
+};
+
+_groupBy([6.1, 4.2, 6.3], Math.floor);
+
 const _pipe =
   (...fns) =>
   (value) =>
