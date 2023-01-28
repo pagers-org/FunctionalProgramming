@@ -7,8 +7,8 @@ const _forEach = (array, callBack) => {
     return undefined;
   }
 
-  for (let i = 0; i < array.length; i++) {
-    callBack(array[i], i, ...array);
+  for (const item of array) {
+    callBack(item, ...array);
   }
 };
 
@@ -59,15 +59,24 @@ const _reduce = (array, callBack, initValue) => {
   return result;
 };
 
+const _take = (array, count) => {
+  if (array.length === 0) {
+    throw new Error(`Array is required`);
+  }
+
+  return array.slice(0, count);
+};
+
 const _pipe =
   (...fns) =>
   (value) =>
-    fns.reduce((acc, fn) => fn(acc), value);
+    _reduce(fns, (acc, fn) => fn(acc), value);
 
 module.exports = {
   _forEach,
   _map,
   _filter,
   _reduce,
+  _take,
   _pipe,
 };
