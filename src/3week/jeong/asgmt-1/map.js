@@ -7,16 +7,14 @@ console.log(map);
 console.log("--------------");
 
 // 커스텀
-Array.prototype.customMap = function (f) {
+const _map = (arr, f) => {
   const newArr = [];
 
-  for (var i = 0; i < this.length; i++) {
-    var item = this[i];
+  for (var i = 0; i < arr.length; i++) {
+    var item = arr[i];
     newArr.push(f(item));
   }
   return newArr;
 };
 
-// test print
-console.log(nums.customMap((el) => el * 2));
-// [ 2, 4, 6, 8, 10 ]
+exports._map = _map;

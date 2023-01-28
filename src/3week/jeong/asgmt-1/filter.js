@@ -6,14 +6,15 @@ console.log(filter);
 
 console.log("--------------");
 // 직접 구현 함수
-Array.prototype.customFilter = function (f) {
+const _filter = (arr, fn) => {
   const newArr = [];
 
-  for (var i = 0; i < this.length; i++) {
-    var item = this[i];
-    if (f(item)) newArr.push(item);
+  for (var i = 0; i < arr.length; i++) {
+    const condition = fn(arr[i], i, ...arr);
+    if (condition) newArr.push(arr[i]);
   }
 
   return newArr;
 };
-console.log(nums.customFilter((el) => el < 3));
+
+exports._filter = _filter;
