@@ -61,15 +61,26 @@ const _reduce = (callback, initValue) => (array) => {
   return result;
 };
 
+const _take = (count) => (array) => {
+  if (array.length === 0) {
+    throw new Error(`Array is required`);
+  }
+
+  return array.slice(0, count);
+};
+
 const _pipe =
   (...fns) =>
   (initialValue) =>
     _reduce((acc, fn) => fn(acc), initialValue)(fns);
 
-export const C = {
+const C = {
   _forEach,
   _map,
   _filter,
   _reduce,
+  _take,
   _pipe,
 };
+
+module.exports = { C };
