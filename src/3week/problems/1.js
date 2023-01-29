@@ -1,12 +1,8 @@
 // 랜덤한 숫자 배열에서 짝수 위치는 더하고, 홀수 위치는 곱한 후에 순서대로 누적해라
-const { map } = require('../refactoring/areumsheep/map');
-const { reduce } = require('../refactoring/areumsheep/reduce');
 
-const pipe = (...logics) => {
-  return (target) => logics.reduce((value, logic) => logic(value), target);
-};
+const { pipe } = require('../utils/pipe');
 
-const businessReduce = (array) => {
+const 짝수_더하기_홀수_곱하기 = (array) => {
   return array.reduce((acc, cur, idx, arr) => {
     if (idx % 2 === 0) acc.push(cur + (arr[idx - 2] ?? 0));
     else acc.push(cur * (arr[idx - 2] ?? 1));
@@ -14,8 +10,7 @@ const businessReduce = (array) => {
   }, []);
 };
 
-const 배수 = (array) => {
-  console.log(array);
+const 배수_분리하기 = (array) => {
   const t = [];
   const h = [];
 
@@ -27,14 +22,12 @@ const 배수 = (array) => {
       h.push(value);
     }
   });
-  console.log(t);
-  console.log(h);
   return {
     t: t,
     h: h,
   };
 };
 
-const call = pipe(businessReduce, 배수);
+const call = pipe(짝수_더하기_홀수_곱하기, 배수_분리하기);
 console.log(call([1, 2, 3, 4, 5, 6, 7]));
 
