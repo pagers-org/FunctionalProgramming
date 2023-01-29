@@ -67,15 +67,57 @@ const _take = (array, count) => {
   return array.slice(0, count);
 };
 
-const _groupBy = (array, callback) => {
-  const obj = {};
-  console.log(array);
+const _keys = (obj) => {
+  const keys = [];
 
-  const data = _map(array, callback);
-  console.log(data);
+  for (const key in obj) {
+    keys.push(key);
+  }
+
+  return keys;
 };
 
-_groupBy([6.1, 4.2, 6.3], Math.floor);
+const _entries = (obj) => {
+  return _map(_keys(obj), (key) => [key, obj[key]]);
+};
+
+const _flat = (array, depth = 1) => {
+  let newArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    if (Array.isArray(array[i]) && depth > 0) {
+      newArray = newArray.concat(_flat(array[i], depth - 1));
+    } else {
+      newArray.push(array[i]);
+    }
+  }
+
+  return newArray;
+};
+
+const _groupBy = (items, callback) => {
+  const isArray = Array.isArray(items);
+  const array = isArray
+    ? items
+    : Object.entries(items)
+        .flat()
+        .filter((item) => typeof item === "number");
+
+  return _reduce(
+    array,
+    (grouped, element) => {
+      const key = callback(element);
+      if (!grouped[key]) {
+        grouped[key] = [];
+      }
+      grouped[key].push(element);
+      return grouped;
+    },
+    {}
+  );
+};
+
+_groupBy({ a: 6.1, b: 4.2, c: 6.3 }, Math.floor);
 
 const _pipe =
   (...fns) =>
@@ -88,5 +130,6 @@ module.exports = {
   _filter,
   _reduce,
   _take,
+  _groupBy,
   _pipe,
 };

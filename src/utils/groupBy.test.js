@@ -1,15 +1,12 @@
 // FIXME: npm test /src/utils/groupBy.test.js
 
-// 어떤 것을 해볼까요?
-const groupBy = (arr, callback) => {
-  return arr;
-};
+const { _groupBy } = require("../refactoring/Kay/utils");
 
 describe("groupBy 테스트", () => {
   describe("non-lazy", () => {
     it("case: 1, Normal", () => {
       const array = [6.1, 4.2, 6.3];
-      const grouped = groupBy(array, Math.floor);
+      const grouped = _groupBy(array, Math.floor);
 
       expect(grouped).toEqual({ 4: [4.2], 6: [6.1, 6.3] });
     });
@@ -23,8 +20,8 @@ describe("groupBy 테스트", () => {
 
       // 두 번째 인자가 index
       const [groupedFirstIndex, groupedSecondIndex] = [
-        groupBy(array, 0),
-        groupBy(array, 1),
+        _groupBy(array, (item) => item[0]),
+        _groupBy(array, (item) => item[1]),
       ];
 
       expect(groupedFirstIndex).toEqual({
@@ -45,7 +42,7 @@ describe("groupBy 테스트", () => {
     });
 
     it("case: 3, Advanced", () => {
-      const grouped = groupBy({ a: 6.1, b: 4.2, c: 6.3 }, Math.floor);
+      const grouped = _groupBy({ a: 6.1, b: 4.2, c: 6.3 }, Math.floor);
 
       expect(grouped).toEqual({ 4: [4.2], 6: [6.1, 6.3] });
     });
