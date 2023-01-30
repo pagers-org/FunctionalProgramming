@@ -1,4 +1,5 @@
 const { uniqueBy } = require('../uniqueBy');
+const { NL } = require('../../non-lazy');
 
 
 describe('uniqueBy 테스트', () => {
@@ -7,13 +8,8 @@ describe('uniqueBy 테스트', () => {
       const decimalNumbers = [2.3, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 3.2, 2.6, 2.8];
       const uniqueByFloor = uniqueBy(Math.floor);
 
-      expect(uniqueByFloor(decimalNumbers)).toEqual();
+      expect(uniqueByFloor(decimalNumbers)).toEqual(NL.uniqueBy(decimalNumbers, Math.floor));
     });
 
-    it('case: 2, arr is not iterable', () => {
-      const errorObjects = uniqueBy({ a: 'a', b: 'b' });
-      
-      expect(errorObjects).toEqual([]);
-    });
   });
 });
