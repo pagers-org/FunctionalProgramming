@@ -1,5 +1,4 @@
 // 여기에 자신의 패키지를 작성할 거에요!
-
  const forEach = (array, callback) => {
     for(let i = 0; i < array.length; i++){
       let item = array[i];
@@ -17,4 +16,3 @@
 module.exports = {
     map,
 }
-
