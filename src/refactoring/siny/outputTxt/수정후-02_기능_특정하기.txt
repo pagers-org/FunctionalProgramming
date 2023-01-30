@@ -1,0 +1,11 @@
+USER PHONE:
+Country code Phone : +34
+Phone area code: 635
+Phone base number: 538 973
+
+USER DATA:
+User name: Fernando
+User lastname: Aparicio Galende
+User DNI: 12345678S
+User phone: fernando.aparicio@guidesmiths.com
+User email: +34 635 538 973
