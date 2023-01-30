@@ -8,24 +8,15 @@ console.log("--------------");
 
 // 직접 구현 함수
 
-Array.prototype.customReduce = function (f, initialValue) {
-  let i = 0;
-  let acc;
-  //initialValue가 제공되지 않으면, reduce는 인덱스 0을 건너뛰고 인덱스 1부터 순회하고 accumulator는 배열 첫 번째 값과 같다.
-  initialValue ? (acc = initialValue) : ([i, acc] = [1, this[0]]);
-  for (; i < this.length; i++) {
-    acc += this[i];
-  }
+Array.prototype.customReduce = function (f, init) {
+  let acc = init || 0;
+  this.forEach((el) => {
+    acc = f(acc, el);
+  });
   return acc;
 };
 
+console.log(nums.customReduce((a, b) => a + b)); //15
 console.log(
-  nums.customReduce((a, b) => {
-    a + b;
-  })
-); //15
-console.log(
-  nums.customReduce((a, b) => {
-    a + b;
-  }, 5) //20
+  nums.customReduce((a, b) => a + b, 5) //20
 );
