@@ -1,0 +1,17 @@
+🐲
+I have a dog
+undefined
+No animal
+No animal name
+No animal gender
+Lucy is a female dog
+[]
+[ 'banana', 'pineapple' ]
+unknown
+unknown
+cabbage
+Fiesta
+Some Street Name
+undefined
+true
+undefined
