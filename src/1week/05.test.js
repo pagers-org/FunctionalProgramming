@@ -43,6 +43,6 @@ describe('deepCopy', () => {
       2: null,
     };
 
-    expect(deepCopy(obj)).toEqual({});
+    expect(deepCopy(obj2)).toEqual(obj2);
   });
 });
