@@ -1,8 +1,8 @@
-const { reduce } = require('./reduce');
+const { NL } = require('../non-lazy/_index');
 
 const pipe =
   (...logics) =>
   (target) =>
-      reduce(logics, (value, logic) => logic(value), target);
+      NL.reduce(logics, (value, logic) => logic(value), target);
     
 exports.pipe = pipe;
