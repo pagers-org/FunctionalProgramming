@@ -1,31 +1,5 @@
 // FIXME: npm test /src/utils/unique.test.js
-const {I} = require('../internal_utils');
-
-// 어떤 것을 해볼까요?
-const uniqueBy = (arr, callback, isSorted) => {
-  if (!I.isIterable(arr)) {
-    return [];
-  }
-  const map = new Map();
-  return arr.reduce((acc, item) => {
-    let key;
-    // Object인 경우
-    if (!Array.isArray(item)) {
-      key = JSON.stringify(item);
-    }
-    // callback이 있는 경우
-    if (typeof callback === 'function') {
-      key = callback(item);
-    }
-
-    if (!map.has(key)) {
-      acc.push(item);
-    }
-    map.set(key, item);
-
-    return acc;
-  }, []);
-};
+const { uniqueBy } = require('../uniqueBy');
 
 describe('uniqueBy 테스트', () => {
   describe('non-lazy', () => {

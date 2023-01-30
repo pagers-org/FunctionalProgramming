@@ -1,21 +1,5 @@
 // FIXME: npm test /src/utils/groupBy.test.js
-const {I} = require('../internal_utils');
-
-// 어떤 것을 해볼까요?
-const groupBy = (arr, condition) => {
-  if (!I.isIterable(arr)) {
-    arr = Object.values(arr);
-  }
-  return arr.reduce((acc, value) => {
-    let key = value[condition];
-    if (typeof condition === 'function') {
-      key = condition(value);
-    }
-    acc[key] = acc[key] || [];
-    acc[key].push(value);
-    return acc;
-  }, {});
-};
+const { groupBy } = require('../groupBy');
 
 describe('groupBy 테스트', () => {
   describe('non-lazy', () => {

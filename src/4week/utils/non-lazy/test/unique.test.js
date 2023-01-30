@@ -1,13 +1,5 @@
 // FIXME: npm test /src/utils/unique.test.js
-const {I} = require('../internal_utils');
-
-// 어떤 것을 해볼까요?
-const unique = (arr) => {
-  if (!I.isIterable(arr)) {
-    return [];
-  }
-  return [...new Set(arr)];
-}
+const { unique } = require('../unique');
 
 describe('unique 테스트', () => {
   describe('non-lazy', () => {
