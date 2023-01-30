@@ -1,4 +1,5 @@
 const { I } = require('../../internal_utils');
+const { NL } = require('../non-lazy/_index');
 
 const uniqueBy = (callback) => {
   const map = new Map();
@@ -6,7 +7,7 @@ const uniqueBy = (callback) => {
     if (!I.isIterable(iter)) {
       return [];
     }
-    return iter.reduce((acc, item) => {
+    return NL.reduce(iter, (acc, item) => {
       let key;
       // Object인 경우
       if (!Array.isArray(item)) {
