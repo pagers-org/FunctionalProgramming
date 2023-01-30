@@ -1,7 +1,6 @@
 const { uniqueBy } = require('../uniqueBy');
 const { NL } = require('../../non-lazy');
 
-
 describe('uniqueBy 테스트', () => {
   describe('lazy', () => {
     it('case: 1, Advanced', () => {
