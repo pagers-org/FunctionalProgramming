@@ -1,8 +1,25 @@
 // FIXME: npm test /src/utils/unique.test.js
+const {I} = require('../internal_utils');
 
 // 어떤 것을 해볼까요?
 const unique = (arr, callback, isSorted) => {
-  return arr;
+  if (I.isIterable(arr)) {
+    if (typeof callback === 'function') {
+      const set = new Set();
+      return arr.reduce((acc, value) => {
+        const test = callback(value);
+        if (!set.has(test)) {
+          acc.push(value);
+        }
+        set.add(test);
+
+        return acc;
+      }, []);
+    }
+    else {
+      return [...new Set(arr)];
+    }
+  }
 };
 
 describe('unique 테스트', () => {
