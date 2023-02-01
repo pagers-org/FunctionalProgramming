@@ -1,9 +1,7 @@
 // FIXME: npm test /src/utils/groupBy.test.js
-
+const { timer } = require('../utils/lib.js');
+const { groupBy } = require('../refactoring/siny/utils');
 // 어떤 것을 해볼까요?
-const groupBy = (arr, callback) => {
-  return arr;
-};
 
 describe('groupBy 테스트', () => {
   describe('non-lazy', () => {
@@ -42,7 +40,9 @@ describe('groupBy 테스트', () => {
     });
 
     it('case: 3, Advanced', () => {
+      timer.start();
       const grouped = groupBy({ a: 6.1, b: 4.2, c: 6.3 }, Math.floor);
+      timer.end();
 
       expect(grouped).toEqual({ 4: [4.2], 6: [6.1, 6.3] });
     });

@@ -1,7 +1,5 @@
-const { reduce, pipe, curry2, sort, filter } = require('../utils.js');
+const { reduce, pipe, curry2, sort, G } = require('../utils.js');
 const curredSort = curry2(sort);
-const curredFilter = curry2(filter);
-
 const solution1 = arr => {
   const calcMulti = (acc, item, i) => {
     if (i % 2) return acc;
@@ -21,8 +19,8 @@ const solution1 = arr => {
 
   const _중간결과 = pipe(calcAddByArr, calcMultiByArr)(arr);
   const sortByAsc = curredSort((a, b) => a - b);
-  const _2의_배수만_filter = curredFilter(item => !(item % 2));
-  const _3의_배수만_filter = curredFilter(item => !(item % 3));
+  const _2의_배수만_filter = G.filter(item => !(item % 2));
+  const _3의_배수만_filter = G.filter(item => !(item % 3));
   return {
     t: pipe(_2의_배수만_filter, sortByAsc)(_중간결과),
     h: pipe(_3의_배수만_filter, sortByAsc)(_중간결과),
