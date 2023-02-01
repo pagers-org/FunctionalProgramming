@@ -2,12 +2,16 @@
 
 // 어떤 것을 해볼까요?
 const unique = (arr, callback, isSorted) => {
-  return arr;
+  const result = arr.reduce((acc, v) => {
+    return acc.includes(v) ? acc : [...acc, v];
+  }, []);
+
+  return result;
 };
 
-describe('unique 테스트', () => {
-  describe('non-lazy', () => {
-    it('case: 1, Normal', () => {
+describe("unique 테스트", () => {
+  describe("non-lazy", () => {
+    it("case: 1, Normal", () => {
       const [firstArray, secondArray] = [
         [2, 1, 2],
         [1, 2, 1],
@@ -19,7 +23,7 @@ describe('unique 테스트', () => {
       expect(secondUniqueArray).toEqual([1, 2]);
     });
 
-    it('case: 2, Advanced', () => {
+    it("case: 2, Advanced", () => {
       const [firstArray, secondArray, thirdArray] = [
         [1, 2, 3],
         [1, 1, 2, 2, 3],
@@ -34,7 +38,7 @@ describe('unique 테스트', () => {
       expect(thirdUniqueArray).toEqual([1, 2, 3]);
     });
 
-    it('case: 3, Advanced', () => {
+    it("case: 3, Advanced", () => {
       const objects = [
         { x: 1, y: 2 },
         { x: 2, y: 1 },
