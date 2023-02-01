@@ -11,5 +11,5 @@ exports.L = {
   map,
   pipe,
   reduce,
-  uniqueBy
-}
+  uniqueBy,
+};

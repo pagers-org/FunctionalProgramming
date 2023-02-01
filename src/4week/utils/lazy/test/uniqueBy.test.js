@@ -9,6 +9,5 @@ describe('uniqueBy 테스트', () => {
 
       expect(uniqueByFloor(decimalNumbers)).toEqual(NL.uniqueBy(decimalNumbers, Math.floor));
     });
-
   });
 });

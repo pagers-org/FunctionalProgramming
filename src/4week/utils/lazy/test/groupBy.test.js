@@ -1,7 +1,6 @@
 const { L } = require('../_index');
 const { NL } = require('../../non-lazy/_index');
 
-
 describe('groupBy 테스트', () => {
   describe('lazy', () => {
     it('case: 1, Advanced', () => {
@@ -10,6 +9,5 @@ describe('groupBy 테스트', () => {
 
       expect(groupByFloor(decimalNumbers)).toEqual(NL.groupBy(decimalNumbers, Math.floor));
     });
-
   });
 });
