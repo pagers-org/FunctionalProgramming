@@ -1,3 +1,5 @@
+const { G, map } = require('../refactoring/siny/utils.js');
+
 // FIXME: 프로토타입 =================================================================
 Array.prototype.generate = function (size = 10) {
   let returnArray = [];
@@ -20,7 +22,7 @@ Array.prototype.shuffle = function () {
 };
 
 // FIXME: 상수 라인===================================================================
-const 엄청_큰_배열_크기 = 1000;
+const 엄청_큰_배열_크기 = 10000;
 
 const 이름_목록 = [
   'Zachary',
@@ -363,7 +365,6 @@ const timer = {
 };
 
 const getMockData = () => Object.assign([], 무작위_데이터_리스트);
-
 module.exports = {
   timer,
   getMockData,

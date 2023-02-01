@@ -60,6 +60,96 @@ const toArray = obj => {
 const trim = str => str.trim();
 const split = (separator, str) => str.split(separator);
 
+const G = {};
+
+function* gMap(fn, arr) {
+  for (const item of arr) {
+    yield fn(item);
+  }
+}
+
+function* gFilter(fn, arr) {
+  for (const item of arr) {
+    if (fn(item)) yield item;
+  }
+}
+
+function* gTake(num, arr) {
+  let count = 0;
+  for (const item of arr) {
+    if (count++ !== num) yield item;
+  }
+}
+
+function* gTakeWhile(fn, arr) {
+  for (const item of arr) {
+    if (fn(item)) yield item;
+  }
+}
+
+function* gRange(end) {
+  let start = 0;
+  while (start !== end) {
+    yield start++;
+  }
+}
+
+function* gSkip(n, arr) {
+  let count = 0;
+  for (const item of arr) {
+    if (count++ >= n) yield item;
+  }
+}
+
+G.map = curry2(gMap);
+G.filter = curry2(gFilter);
+G.range = gRange;
+G.take = curry2(gTake);
+G.takeWhile = curry2(gTakeWhile);
+G.skip = curry2(gSkip);
+
+function groupBy(iter, callback) {
+  const newObj = {};
+  const genKey = item => {
+    if (typeof callback === 'function') {
+      return callback(item);
+    } else {
+      // callback은 index 혹은 key
+      return item[callback];
+    }
+  };
+  const genIter = anIter => {
+    if (anIter instanceof Array) {
+      return anIter;
+    }
+    if (anIter instanceof Object) {
+      return Object.values(anIter);
+    }
+    return anIter;
+  };
+  for (const item of genIter(iter)) {
+    let key = genKey(item);
+
+    newObj[key] = newObj?.[key] === undefined ? [item] : [...newObj[key], item];
+  }
+  return newObj;
+}
+
+function* gUnique(arr) {
+  const map = new Map();
+  if (arr === undefined || arr === null) {
+    throw new Error('첫번째 인자는 꼭 필요합니다.');
+  }
+  for (const item of arr) {
+    const key = JSON.stringify(item);
+    if (!map.has(key)) {
+      yield item;
+    }
+    map.set(key, item);
+  }
+}
+
+G.unique = gUnique;
 module.exports = {
   filter,
   reduce,
@@ -71,4 +161,6 @@ module.exports = {
   curry2,
   curry3,
   toArray,
+  groupBy,
+  G,
 };

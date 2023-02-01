@@ -1,9 +1,10 @@
 // FIXME: npm test /src/utils/unique.test.js
 
 // 어떤 것을 해볼까요?
-const unique = (arr, callback, isSorted) => {
-  return arr;
-};
+
+const { G } = require('../refactoring/siny/utils.js');
+const gUnique = G.unique;
+const unique = (arr, callback, isSorted) => (isSorted ? [...gUnique(arr)].sort() : [...gUnique(arr)]);
 
 describe('unique 테스트', () => {
   describe('non-lazy', () => {
@@ -21,7 +22,7 @@ describe('unique 테스트', () => {
 
     it('case: 2, Advanced', () => {
       const [firstArray, secondArray, thirdArray] = [
-        [1, 2, 3],
+        [3, 2, 1],
         [1, 1, 2, 2, 3],
         [1, 2, 3, 3, 3, 3, 3],
       ];

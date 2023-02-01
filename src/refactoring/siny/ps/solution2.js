@@ -8,7 +8,7 @@ const solution2 = str => {
   const splitByComma = curredSplit(',');
   const addToSet = (set, key) => set.add(key);
   const compareTo_글자수가_긴것_우선정렬_글자수가_같으면_알파벳빠른순 = (a, b) =>
-    (b.length === a.length && a.charCodeAt(0) - b.charCodeAt(0)) || b.length - a.length;
+    (b.length === a.length && a < b ? -1 : 1) || b.length - a.length;
 
   return pipe(
     splitByComma,
