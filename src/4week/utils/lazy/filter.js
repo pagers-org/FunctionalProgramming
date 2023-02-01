@@ -1,11 +1,9 @@
 function filter(fn) {
-  const result = [];
-  return (iter) => {
+  return function* (iter) {
     for (const item of iter) {
-      if (fn(item)) result.push(item);
+      if (fn(item)) yield item;
     }
-    return result;
-  }
+  };
 }
 
 exports.filter = filter;

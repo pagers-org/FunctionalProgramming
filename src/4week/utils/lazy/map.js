@@ -1,11 +1,9 @@
 function map(fn) {
-  const result = [];
-  return (iter) => {
+  return function* (iter) {
     for (const item of iter) {
-      result.push(fn(item));
+      yield fn(item);
     }
-    return result;
-  }
+  };
 }
 
 exports.map = map;
