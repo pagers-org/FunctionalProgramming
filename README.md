@@ -153,7 +153,6 @@ npm install # 또는 npm i
 <img src="./assets/6week-3.png" width="700"/>
 <img src="./assets/6week-4.png" width="700"/>
 <img src="./assets/6week-5.png" width="700"/>
-<img src="./assets/6week-6.png" width="700"/>
 
 </div>
 
