@@ -68,10 +68,10 @@ npm install # 또는 npm i
 ## 🌟회차별 정리내용(슬랙 이미지)
 ### 📢 1주차
 
-<div>
+<div align="center">
 
-<img src="./assets/1week-1.png" width="500"/>
-<img src="./assets/1week-2.png" width="500"/>
+<img src="./assets/1week-1.png" width="700"/>
+<img src="./assets/1week-2.png" width="700"/>
 
 </div>
 
@@ -79,11 +79,11 @@ npm install # 또는 npm i
 
 ### 📢 2주차
 
-<div>
+<div align="center">
 
-<img src="./assets/2week-1.png" width="500"/>
-<img src="./assets/2week-2.png" width="500"/>
-<img src="./assets/2week-2.png" width="500"/>
+<img src="./assets/2week-1.png" width="700"/>
+<img src="./assets/2week-2.png" width="700"/>
+<img src="./assets/2week-2.png" width="700"/>
 
 </div>
 
@@ -91,10 +91,10 @@ npm install # 또는 npm i
 
 ### 📢 3주차
 
-<div>
+<div align="center">
 
-<img src="./assets/3week-1.png" width="500"/>
-<img src="./assets/3week-2.png" width="500"/>
+<img src="./assets/3week-1.png" width="700"/>
+<img src="./assets/3week-2.png" width="700"/>
 
 </div>
 
@@ -102,15 +102,15 @@ npm install # 또는 npm i
 
 ### 📢 4주차
 
-<div>
+<div align="center">
 
-<img src="./assets/4week-1.png" width="500"/>
-<img src="./assets/4week-2.png" width="500"/>
-<img src="./assets/4week-3.png" width="500"/>
-<img src="./assets/4week-4.png" width="500"/>
-<img src="./assets/4week-5.png" width="500"/>
-<img src="./assets/4week-6.png" width="500"/>
-<img src="./assets/4week-7.png" width="500"/>
+<img src="./assets/4week-1.png" width="700"/>
+<img src="./assets/4week-2.png" width="700"/>
+<img src="./assets/4week-3.png" width="700"/>
+<img src="./assets/4week-4.png" width="700"/>
+<img src="./assets/4week-5.png" width="700"/>
+<img src="./assets/4week-6.png" width="700"/>
+<img src="./assets/4week-7.png" width="700"/>
 
 </div>
 
@@ -118,12 +118,12 @@ npm install # 또는 npm i
 
 ### 📢 5주차
 
-<div>
+<div align="center">
 
-<img src="./assets/5week-1.png" width="500"/>
-<img src="./assets/5week-2.png" width="500"/>
-<img src="./assets/5week-3.png" width="500"/>
-<img src="./assets/5week-4.png" width="500"/>
+<img src="./assets/5week-1.png" width="700"/>
+<img src="./assets/5week-2.png" width="700"/>
+<img src="./assets/5week-3.png" width="700"/>
+<img src="./assets/5week-4.png" width="700"/>
 
 </div>
 
@@ -146,14 +146,14 @@ npm install # 또는 npm i
 
 ### 📢 6주차
 
-<div>
+<div align="center">
 
-<img src="./assets/6week-1.png" width="500"/>
-<img src="./assets/6week-2.png" width="500"/>
-<img src="./assets/6week-3.png" width="500"/>
-<img src="./assets/6week-4.png" width="500"/>
-<img src="./assets/6week-5.png" width="500"/>
-<img src="./assets/6week-6.png" width="500"/>
+<img src="./assets/6week-1.png" width="700"/>
+<img src="./assets/6week-2.png" width="700"/>
+<img src="./assets/6week-3.png" width="700"/>
+<img src="./assets/6week-4.png" width="700"/>
+<img src="./assets/6week-5.png" width="700"/>
+<img src="./assets/6week-6.png" width="700"/>
 
 </div>
 
@@ -177,11 +177,11 @@ npm install # 또는 npm i
 
 ### 📢 7주차
 
-<div>
+<div align="center">
 
-<img src="./assets/7week-1.png" width="500"/>
-<img src="./assets/7week-2.png" width="500"/>
-<img src="./assets/7week-3.png" width="500"/>
+<img src="./assets/7week-1.png" width="700"/>
+<img src="./assets/7week-2.png" width="700"/>
+<img src="./assets/7week-3.png" width="700"/>
 
 </div>
 
