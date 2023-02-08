@@ -36,6 +36,35 @@
 
 <br/>
 
+## 💡 시작하기
+> 해당 프로젝트는 npm으로 진행하시면 됩니다. 물론, yarn/pnpm도 상관 없어요.
+> - eslint, prettier 등을 기본적으로 제공합니다.
+> - 단위 테스트가 가능한 jest, e2e 용 cypress도 함께 설정된 프로젝트 폴더이므로 자유롭게 진행하시면 됩니다.
+
+```sh
+git clone https://github.com/FECrash/FunctionalProgramming.git
+
+cd ./FunctionalProgramming
+
+npm install # 또는 npm i
+```
+
+### 🤔 각 폴더 설명
+> 1부
+- `src/1week` : 더 좋게 바꿀 수 있는 방법은 무엇일까요? 간단한 함수를 리팩토링 해봅시다.
+- `src/2week` : 책에 소개된 로직을 앱으로 구현한 프로젝트입니다. 함수형 철학을 토대로 리팩토링 해봅시다.
+  - 단, 몇 개의 버그를 남겨 두었습니다. NaN이 된다던가, 무료 배송 아이콘을 어떤 조건에 출력해야 하는지 등... 원하는 대로 확장시켜 보세요.
+  - 테스트 프레임워크를 잘 활용하여 안전하고 견고한 앱으로 만들어 봅시다.
+
+> 1부 종료 및 2부를 여는 시간
+- `src/make-your-package` : npm에 배포하는 프로세스를 경험하는 프로젝트입니다.
+
+> 2부
+- `src/refactoring` : 리팩토링 전과, 그 후. 어떤 차이가 있을까요? 어떻게 고민하면 좀 더 클린 코드 철학을 녹여서 만들 수 있을까요?
+- `src/utils` : 여러분이 구현하는 함수형 유틸리티 코드가 들어갑니다. `map, filter, reduce, unique, groupBy, promise...` 함수형 유틸리티는 결국 어떤 것으로 귀결될까요?
+
+<br/>
+
 ## 🌟회차별 정리내용(슬랙 이미지)
 ### 📢 1주차
 
