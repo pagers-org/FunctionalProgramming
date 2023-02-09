@@ -20,7 +20,7 @@ Array.prototype.shuffle = function () {
 };
 
 // FIXME: 상수 라인===================================================================
-const 엄청_큰_배열_크기 = 1000;
+const 엄청_큰_배열_크기 = 10000;
 
 const 이름_목록 = [
   'Zachary',
@@ -362,9 +362,12 @@ const timer = {
   },
 };
 
+timer.start();
 const getMockData = () => Object.assign([], 무작위_데이터_리스트);
+console.log(getMockData());
+timer.end();
 
-module.exports = {
-  timer,
-  getMockData,
-};
+// module.exports = {
+//   timer,
+//   getMockData,
+// };
