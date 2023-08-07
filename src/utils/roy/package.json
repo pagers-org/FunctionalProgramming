@@ -1,0 +1,13 @@
+{
+  "name": "utils",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitest/ui": "^0.28.3",
+    "vitest": "^0.28.2"
+  },
+  "scripts": {
+    "test": "vitest"
+  }
+}
